@@ -20,6 +20,7 @@
 
         <style>
       
+
 #mainImg { 
   background: url(https://cloud.githubusercontent.com/assets/15967809/11419184/b1e38f64-944b-11e5-9316-5589f1109a21.jpg) no-repeat center center fixed;
   
@@ -33,8 +34,34 @@
   color:rgb(0,0,0);
   font-family:"Roboto",Georgia;
 }
+.project-pic {
+	width: 100%;
+  height: 100%;
+}
+.project-pic-holder{
+  
+	overflow: hidden;
+  background-color:rgb(0, 0, 0);
+    height:130px;
+}
+.blue{
+color:blue;
+}
+.project {
+  
+	overflow: hidden;
 
+    background-color:rgb(217, 217, 217);
+    width:260px;
+    height:260px;
+    
+    border-color:rgb(20, 56, 56);
+    border-style:solid;
+    border-width: 7px;
+    border-radius: 60px;
+    box-shadow:30px 30px 40px black;	
 
+}
 
 #page-title {
   font-family: 'Josefin Sans', cursive;
@@ -58,6 +85,16 @@
 p {
   font-size:1.2em;
 }
+#portfolio { 
+  background: url(https://cloud.githubusercontent.com/assets/15967809/11423125/cc07062a-9467-11e5-9630-87cb3782d109.jpg) no-repeat center center fixed;
+  
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  
+}
+
 
     </style>
 
@@ -68,7 +105,7 @@ p {
 
   <body>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
 <div id="mypage"> 
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
@@ -83,10 +120,13 @@ p {
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="mynav" class="nav navbar-nav">
-            <li class="active"><a href="#home" class="active">Home</a></li>
-            <li><a href="#abouta">About</a></li>
-            <li><a href="#portfolio">Portfolio</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li class="active"><a href="#home" class="active"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
+            <li><a href="#abouta"><span class="glyphicon glyphicon-user"></span> 
+              About</a></li>
+            <li><a href="#portfolio"><span class="glyphicon glyphicon-briefcase"></span> 
+               Portfolio</a></li>
+            <li><a href="#contact"><span class="glyphicon glyphicon-envelope"></span> 
+               Contact</a></li>
             
               </ul> 
         </div><!--/.nav-collapse -->
@@ -118,26 +158,27 @@ p {
 
       <div class="btn-group hidden-xs" id="slinks" role="group">
         
-<button type="button" class="btn btn-default "><i class="icon-github-sign icon-4x"></i><h3>Github</h3></button>
-        <button type="button" class="btn btn-primary "><i class="icon-facebook-sign icon-4x"></i><h3>FaceBook</h3></button>
+<a type="button" href="https://github.com/chaituvr" target="_blank" class="btn btn-default "><i class="icon-github-sign icon-4x"></i><h3>&nbsp Github &nbsp</h3></a>
+        <a type="button" href="https://www.facebook.com/raju.chaitanya" target="_blank" class="btn btn-primary "><i class="icon-facebook-sign icon-4x"></i><h3>Facebook</h3></a>
      
   
-  <button type="button" class="btn btn-info "><i class="icon-twitter-sign icon-4x"></i><h3>Twitter </h3></button>
-  <button type="button" class="btn btn-danger"><i class="icon-google-plus-sign icon-4x"></i><h3>Google+</h3></button>
-    <button type="button" class="btn btn-primary"><i class="icon-linkedin-sign icon-4x"></i><h3>LinkedIn</h3></button>
-        <button type="button" class="btn btn-success"><i class="icon-fire icon-4x"></i><h3>Free.C.C</h3></button> 
+  <a type="button" href="https://twitter.com/yourchaitu" target="_blank" class="btn btn-info "><i class="icon-twitter-sign icon-4x"></i><h3>&nbsp Twitter &nbsp</h3></a>
+  <a type="button" href="https://plus.google.com/u/0/+ChaitanyaRajuS" target="_blank" class="btn btn-danger"><i class="icon-google-plus-sign icon-4x"></i><h3>Google+</h3></a>
+    <a type="button" href="in.linkedin.com/in/chaituvr" target="_blank" class="btn btn-primary"><i class="icon-linkedin-sign icon-4x"></i><h3>LinkedIn</h3></a>
+        <a type="button" href="http://www.freecodecamp.com/chaituvr" target="_blank" class="btn btn-success"><i class="icon-fire icon-4x"></i><h3>Free.C.C</h3></a> 
 </div>
+</div>
+<br/><br/><br/><br/><br/><br/>
 
   </center>
 </div>
   </div>
 
-</div>
 
 <div id="abouta">
   <br/><br/><br/>
   <div class="container">
-  <h2 id="about-title" class="page-header center-justified animated fadeInRight"><b>About Me:</b></h2>
+  <h2 id="about-title" class="page-header center-justified animated fadeIn"><b>About Me:</b></h2>
     <div class="row">
     <div class="col-md-5">
       <br/><br/>
@@ -171,18 +212,146 @@ p {
 </div>
 </div>
   </div>
+<br/><br/><br/>
 </div>
-<div id="portfoilo">
+
+<div id="portfolio">
+  <div class="container"><br/>
+    <h2 style="color:white" id="contact-title" class="page-header center-justified animated fadeInLeft">
+    <b>Portfolio</b></h2>
+ 
+    <center> 
+    
+    <br/><br/>
+    <div class="row">
+      <div class="col-sm-4 col-xs-12">
+       
+        <div class="project">
+         <div class="project-pic-holder"> 
+  <img class="project-pic" src="http://stylonica.com/wp-content/uploads/2014/03/cats_animals_kittens_cat_kitten_cute_desktop_1680x1050_hd-wallpaper-753974.jpeg"  alt="project1">
+           </div>
+          <div class="caption">
+        <h3>Cat projectwedf</h3>
+        <p><a href="#" class="btn btn-primary" role="button">Open</a></p>
+      </div>
+        </div>
+      &nbsp</div>
+      <div class="col-sm-4 col-xs-12">
+       
+        <div class="project">
+         <div class="project-pic-holder"> 
+  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
+           </div>
+          awefkjh
+        </div>
+      &nbsp</div>
+      <div class="col-sm-4 col-xs-12">
+       
+        <div class="project">
+         <div class="project-pic-holder"> 
+  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
+           </div>
+          awefkjh
+        </div>
+      &nbsp</div>
+    </div>
+<div class="row">
+      <div class="col-sm-4 col-xs-12">
+       
+        <div class="project">
+         <div class="project-pic-holder"> 
+  <img class="project-pic" src="http://stylonica.com/wp-content/uploads/2014/03/Cute-Cats-cats-33440930-1280-800.jpg"  alt="project1">
+           </div>
+          awefkjhawefSD
+        </div>
+      &nbsp</div>
+      <div class="col-sm-4 col-xs-12">
+       
+        <div class="project">
+         <div class="project-pic-holder"> 
+  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
+           </div>
+          awefkjh
+        </div>
+      &nbsp</div>
+      <div class="col-sm-4 col-xs-12">
+       
+        <div class="project">
+         <div class="project-pic-holder"> 
+  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
+           </div>
+          awefkjh
+        </div>
+      &nbsp</div>
+    </div>
+
+    <p>hey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfolio
+    </p>
+    </center>
+    </div>
+ 
 </div>
-<p>Out of page kake amawejfa</p>
-</div>
+<div id="contact" class="container">
+  <br/>
+  <h2 id="contact-title" class="page-header center-justified animated fadeIn">
+    <b>Contact:</b></h2>
+  <center>
+    </br></br></br></br>
+  <div class="row">
+   <div class="col-md-6" style="border-width:2px">
+     
+     <h3 style='text-align: left;'><b>Chaitanya Raju</b><br/><br/> 
+      Connect with me:
+       <button id="mail" class="btn btn-info">Click here for my Email address <span class="glyphicon glyphicon-user"></span></button>
+       <div id="mail-id" class="animated  flipInY">
+       <center><h1><a href="mailto:yourchaitu@gmail.com?Subject=Contacting from portfolio" target="_blank">yourchaitu@gmail.com</a></h1></center>
+       </div>
+       <div><br/><h6>Note:Hey Please don't Spam my mail</h6></div></h3>
+    </div>
+    <div class="col-md-6">
+     <a type="button" href="https://github.com/chaituvr" target="_blank" class="btn btn-default "><i class="icon-github-sign icon-4x"></i><h3>&nbsp Github &nbsp </h3></a>
+        <a type="button" href="https://www.facebook.com/raju.chaitanya" target="_blank" class="btn btn-primary "><i class="icon-facebook-sign icon-4x"></i><h3>Facebook</h3></a>
+     
   
+  <a type="button" href="https://twitter.com/yourchaitu" target="_blank" class="btn btn-info "><i class="icon-twitter-sign icon-4x"></i><h3>&nbsp Twitter &nbsp</h3></a><br/><br/>
+  <a type="button" href="https://plus.google.com/u/0/+ChaitanyaRajuS" target="_blank" class="btn btn-danger"><i class="icon-google-plus-sign icon-4x"></i><h3> &nbsp Google+</h3></a>
+    <a type="button" href="in.linkedin.com/in/chaituvr" target="_blank" class="btn btn-primary"><i class="icon-linkedin-sign icon-4x"></i><h3>LinkedIn &nbsp</h3></a>
+        <a type="button" href="http://www.freecodecamp.com/chaituvr" target="_blank" class="btn btn-success"><i class="icon-fire icon-4x"></i><h3>Free.C.C</h3></a> 
+    </div>
+    </div>
+   <center>
+     <br/><br/><br/><br/><br/><br/><br/><br/>
+
+</div>
+<!--out-->
+</div>
+
+
+
+<center><p>Thank You! :) </p></center>
+<footer class="footer">
+      <div class="container-fluid panel-footer ">
+        <div class="container text-muted">
+        <center>
+          <a href="#mainImg"><span class="glyphicon glyphicon-home"></span> Home</a>
+  &nbsp &nbsp &nbsp &nbsp
+          <a href="#abouta"><span class="glyphicon glyphicon-user"></span> About</a>
+          &nbsp &nbsp &nbsp &nbsp
+          <a href="#portfolio"><span class="glyphicon glyphicon-briefcase"></span> Portfolio</a>
+          &nbsp &nbsp &nbsp &nbsp<a href="#contact"><span class="glyphicon glyphicon-envelope"></span> Contact</a>
+          <br/><br/><a href="https://github.com/chaituvr"><h6><span class="glyphicon glyphicon-copyright-mark"></span> Chaitanya raju</h6>
+          </a>
+          </center>
+        </div>
+      </div>
+    </footer>
+    
     <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
 <script src='http://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
 
         <script>
       $(document).ready(function(){
-  //$("#mainImg").remove();
+// $("nav,#mainImg,#abouta,#portfolio").remove();
   welcome();
   $( window ).resize(function() {
   photo();
@@ -190,6 +359,36 @@ p {
   photo();
   scroll(); 
   imgflip();
+  mail();
+  $(".project").hover(
+  function() {
+    
+    $( this ).animate({
+    width: "265px",
+      height:"265px",
+    opacity: 0.8,
+  }, 100 );
+    $(this).addClass("animated swing");
+  }, function() {
+    $( this ).animate({
+    width: "260px",
+      height:"260px",
+    opacity: 1,
+  }, 100 );
+     $(this).removeClass("animated swing");
+  }
+);
+  $(window).scroll(function() {
+  var scrollTop = $(window).scrollTop();
+  if ( scrollTop > $('#abouta').offset().top - 300) { 
+    $('#abouta').addClass('blue');
+  } else {
+    if ($('#abouta').hasClass('blue')) {
+      $('#abouta').removeClass('blue');
+    }
+
+  }
+});
 });  
 
 var welcome=function(){
@@ -213,16 +412,16 @@ var photo=function(){
   
   var wid=$(window).width();
   var high=$(window).height();
- $("#mainImg").css("height",high+70);
+ //$("#mainImg").css("height",high+70);
   //$("#abouta").css("height",high+700);
-
+//$("#portfolio").css("height",high+70);
 };
 
 
 var scroll = function(){
   $(document).ready(function(){
     $("#home").addClass("animated fadeInLeft")
-          $("#about-lang").addClass("animated fadeInRight");
+          $("#about-lang").addClass("animated fadeInUp");
   $(window).scroll(function() {
     
     if ($(document).scrollTop() > 350) {
@@ -255,6 +454,16 @@ var imgflip=function(){
   
 };
 
+var mail=function(){
+   console.log("Hey Devloper.. Thanks for opening console .. :) if you want to develop something with me .. Mail me .. ")
+  $("#mail-id").hide();
+  $("#mail").click(function(){
+    $("#mail").addClass("animated hinge")
+    $( "#mail-id" ).delay(1500).toggle( "slow", function() {
+   
+  });
+  });
+};
       //@ sourceURL=pen.js
     </script>
 
