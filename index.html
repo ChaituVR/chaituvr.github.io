@@ -18,6 +18,7 @@
 
         <style>
       
+
 #mainImg { 
   background: url(https://cloud.githubusercontent.com/assets/15967809/11419184/b1e38f64-944b-11e5-9316-5589f1109a21.jpg) no-repeat center center fixed;
   
@@ -39,31 +40,43 @@
   
 	overflow: hidden;
   background-color:rgb(0, 0, 0);
-    height:130px;
+    height:160px;
 }
 .blue{
-color:blue;
+color:yellow;
+  background-color:blue;
+}
+#test{
+  border-style:solid;
+
+  
+  
 }
 .project {
   
 	overflow: hidden;
+
     background-color:rgb(217, 217, 217);
     width:260px;
-    height:260px;
-    
-    border-color:rgb(20, 56, 56);
+    height:300px;
+    color:rgb(255,0,0);
+    border-color:rgb(0, 0, 0);
     border-style:solid;
-    border-width: 7px;
-    border-radius: 60px;
+    border-width: 8px;
+    border-radius: 40px;
     box-shadow:30px 30px 40px black;	
+
 }
+
 #page-title {
   font-family: 'Josefin Sans', cursive;
   font-size:2.5em;
   color:rgb(0,0,0);
 }
-#abouta { 
-  background: url(https://cloud.githubusercontent.com/assets/15967809/11424120/6beae87a-9470-11e5-8009-2f782c034172.jpg) no-repeat center center fixed;
+#abouta {
+  -webkit-text-stroke: 0.5px black;
+  color:rgb(77, 0, 76);
+  background: url(https://pixabay.com/static/uploads/photo/2014/07/01/12/34/street-381227_960_720.jpg) no-repeat center center fixed ;
   
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -80,7 +93,8 @@ p {
   font-size:1.2em;
 }
 #portfolio { 
-  background: url(https://cloud.githubusercontent.com/assets/15967809/11423125/cc07062a-9467-11e5-9630-87cb3782d109.jpg) no-repeat center center fixed;
+  color:rgb(255,0,0);
+  background: url(https://pixabay.com/static/uploads/photo/2015/09/28/14/59/still-life-962213_960_720.jpg) no-repeat center center fixed;
   
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -88,6 +102,13 @@ p {
   background-size: cover;
   
 }
+
+.codehover {
+ background-color:lightblue;
+color:blue;
+}
+
+
     </style>
 
     
@@ -96,23 +117,22 @@ p {
   </head>
 
   <body>
-
-   <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <div id="mypage"> 
 <nav class="navbar navbar-default navbar-fixed-top">
       <div class="container-fluid">
         <div class="navbar-header">
           
-      <a class="navbar-brand" href="#mainImg">
+      <a class="navbar-brand" href="#home">
         <img class="hidden-xs" alt="Brand" src="https://avatars3.githubusercontent.com/u/15967809?v=3&s=75">
           </a>
    
-        <a id="page-title" class="navbar-brand" href="#mainImg">Chaitanya Raju</a>
+        <a id="page-title" class="navbar-brand" href="#home">Chaitanya Raju</a>
         
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul id="mynav" class="nav navbar-nav">
-            <li class="active"><a href="#home" class="active"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
+            <li><a href="#home" class="active"><span class="glyphicon glyphicon-home"></span>  Home</a></li>
             <li><a href="#abouta"><span class="glyphicon glyphicon-user"></span> 
               About</a></li>
             <li><a href="#portfolio"><span class="glyphicon glyphicon-briefcase"></span> 
@@ -134,7 +154,7 @@ p {
     
     <center><h1> </h1></center>
   </div>
-  <div class="col-md-8" id="homehead">
+  <div class="col-md-8" id="homehead" style="color:black">
     <center><h1>Thanks for visiting my Portfolio </h1> <h1 id="smile">:)</h1></center> 
     </div> 
 </div> <!--row-->
@@ -169,8 +189,10 @@ p {
 
 <div id="abouta">
   <br/><br/><br/>
+  <div class=" container-fluid">
+  <h2 id="about-title" class=" page-header  animated fadeIn"><b>About Me</b></h2>
+  </div>
   <div class="container">
-  <h2 id="about-title" class="page-header center-justified animated fadeIn"><b>About Me:</b></h2>
     <div class="row">
     <div class="col-md-5">
       <br/><br/>
@@ -191,8 +213,11 @@ p {
           <br/><br/>
           <h3>Languages and Frameworks:</h3>
           <center>
-        <img class="hover"  src="https://cdn4.iconfinder.com/data/icons/logos-3/504/html5-128.png">
-          <img class=" hover" src="https://cdn4.iconfinder.com/data/icons/logos-3/504/javascript-128.png"> 
+         
+        
+          <img class="hover" src="https://cdn4.iconfinder.com/data/icons/logos-3/504/html5-128.png">
+            
+          <img class="hover" src="https://cdn4.iconfinder.com/data/icons/logos-3/504/javascript-128.png"> 
           <img class="hover"  src="https://cdn4.iconfinder.com/data/icons/logos-3/504/Bootstrap-128.png"> 
           <img class="hover"  src="https://cdn4.iconfinder.com/data/icons/logos-3/504/angularjs-128.png"><br/> 
         <img class="hover"  src="https://cdn2.iconfinder.com/data/icons/designer-skills/128/code-programming-javascript-jquery-develop-framework-language-128.png">
@@ -208,7 +233,7 @@ p {
 </div>
 
 <div id="portfolio">
-  <div class="container"><br/>
+  <div class="container-fluid"><br/>
     <h2 style="color:white" id="contact-title" class="page-header center-justified animated fadeInLeft">
     <b>Portfolio</b></h2>
  
@@ -219,69 +244,88 @@ p {
       <div class="col-sm-4 col-xs-12">
        
         <div class="project">
-         <div class="project-pic-holder"> 
-  <img class="project-pic" src="http://stylonica.com/wp-content/uploads/2014/03/cats_animals_kittens_cat_kitten_cute_desktop_1680x1050_hd-wallpaper-753974.jpeg"  alt="project1">
-           </div>
+         <div class="project-pic-holder" style="pointer-events:none;"> 
+  <iframe  src="http://s.codepen.io/ChaituVR/fullcpgrid/QjeaXZ" align="middle"  scrolling="no" width="100%" height="100%" frameborder="0" allowtransparency="true" sandbox="allow-scripts allow-pointer-lock allow-same-origin" >
+  <p>Your browser does not support iframes.....</p>
+</iframe>         </div>
           <div class="caption">
-        <h3>Cat projectwedf</h3>
-        <p><a href="#" class="btn btn-primary" role="button">Open</a></p>
+        <h3>Random Quote Machine</h3>
+        <p><a href="http://codepen.io/ChaituVR/full/QjeaXZ/" class="btn btn-primary" role="button">Open</a></p>
       </div>
         </div>
       &nbsp</div>
       <div class="col-sm-4 col-xs-12">
        
         <div class="project">
-         <div class="project-pic-holder"> 
-  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
-           </div>
-          awefkjh
+         <div class="project-pic-holder" style="pointer-events:none;"> 
+  <iframe  src="http://s.codepen.io/ChaituVR/fullcpgrid/QjeaXZ" align="middle"  scrolling="no" width="100%" height="100%" frameborder="0" allowtransparency="true" sandbox="allow-scripts allow-pointer-lock allow-same-origin" >
+  <p>Your browser does not support iframes.....</p>
+</iframe>         </div>
+          <div class="caption">
+        <h3>Random Quote Machine</h3>
+        <p><a href="http://codepen.io/ChaituVR/full/QjeaXZ/" class="btn btn-primary" role="button">Open</a></p>
+      </div>
         </div>
       &nbsp</div>
-      <div class="col-sm-4 col-xs-12">
+     <div class="col-sm-4 col-xs-12">
        
         <div class="project">
-         <div class="project-pic-holder"> 
-  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
-           </div>
-          awefkjh
+         <div class="project-pic-holder" style="pointer-events:none;"> 
+  <iframe  src="http://s.codepen.io/ChaituVR/fullcpgrid/QjeaXZ" align="middle"  scrolling="no" width="100%" height="100%" frameborder="0" allowtransparency="true" sandbox="allow-scripts allow-pointer-lock allow-same-origin" >
+  <p>Your browser does not support iframes.....</p>
+</iframe>         </div>
+          <div class="caption">
+        <h3>Random Quote Machine</h3>
+        <p><a href="http://codepen.io/ChaituVR/full/QjeaXZ/" class="btn btn-primary" role="button">Open</a></p>
+      </div>
         </div>
       &nbsp</div>
-    </div>
+      </div>
 <div class="row">
       <div class="col-sm-4 col-xs-12">
        
         <div class="project">
-         <div class="project-pic-holder"> 
-  <img class="project-pic" src="http://stylonica.com/wp-content/uploads/2014/03/Cute-Cats-cats-33440930-1280-800.jpg"  alt="project1">
-           </div>
-          awefkjhawefSD
+         <div class="project-pic-holder" style="pointer-events:none;"> 
+  <iframe  src="http://s.codepen.io/ChaituVR/fullcpgrid/QjeaXZ" align="middle"  scrolling="no" width="100%" height="100%" frameborder="0" allowtransparency="true" sandbox="allow-scripts allow-pointer-lock allow-same-origin" >
+  <p>Your browser does not support iframes.....</p>
+</iframe>         </div>
+          <div class="caption">
+        <h3>Random Quote Machine</h3>
+        <p><a href="http://codepen.io/ChaituVR/full/QjeaXZ/" class="btn btn-primary" role="button">Open</a></p>
+      </div>
         </div>
       &nbsp</div>
       <div class="col-sm-4 col-xs-12">
        
         <div class="project">
-         <div class="project-pic-holder"> 
-  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
-           </div>
-          awefkjh
-        </div>
+         <div class="project-pic-holder" style="pointer-events:none;"> 
+  <iframe  src="http://s.codepen.io/ChaituVR/fullcpgrid/QjeaXZ" align="middle"  scrolling="no" width="100%" height="100%" frameborder="0" allowtransparency="true" sandbox="allow-scripts allow-pointer-lock allow-same-origin" >
+  <p>Your browser does not support iframes.....</p>
+</iframe>         </div>
+          <div class="caption">
+        <h3>Random Quote Machine</h3>
+        <p><a href="http://codepen.io/ChaituVR/full/QjeaXZ/" class="btn btn-primary" role="button">Open</a></p>
+      </div>
+          </div>
       &nbsp</div>
-      <div class="col-sm-4 col-xs-12">
+     <div class="col-sm-4 col-xs-12">
        
         <div class="project">
-         <div class="project-pic-holder"> 
-  <img class="project-pic" src="http://www.hercampus.com/sites/default/files/2015/04/18/Cute-Cats-and-Dogs-20-HD-Screensavers.jpg"  alt="project1">
-           </div>
-          awefkjh
+         <div class="project-pic-holder" style="pointer-events:none;"> 
+  <iframe  src="http://s.codepen.io/ChaituVR/fullcpgrid/QjeaXZ" align="middle"  scrolling="no" width="100%" height="100%" frameborder="0" allowtransparency="true" sandbox="allow-scripts allow-pointer-lock allow-same-origin" >
+  <p>Your browser does not support iframes.....</p>
+</iframe>         </div>
+          <div class="caption">
+        <h3>Random Quote Machine</h3>
+        <p><a href="http://codepen.io/ChaituVR/full/QjeaXZ/" class="btn btn-primary" role="button">Open</a></p>
+      </div>
         </div>
       &nbsp</div>
-    </div>
+      </div>
 
-    <p>hey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfoliohey there this is my portfolio
-    </p>
     </center>
     </div>
- 
+ <br/><br/><br/><br/><br/>
 </div>
 <div id="contact" class="container">
   <br/>
@@ -294,11 +338,11 @@ p {
      
      <h3 style='text-align: left;'><b>Chaitanya Raju</b><br/><br/> 
       Connect with me:
-       <button id="mail" class="btn btn-info">Click here for my Email address <span class="glyphicon glyphicon-user"></span></button>
-       <div id="mail-id" class="animated  flipInY">
-       <center><h1><a href="mailto:yourchaitu@gmail.com?Subject=Contacting from portfolio" target="_blank">yourchaitu@gmail.com</a></h1></center>
+       <button id="mail" class="btn btn-info">Click here to view my Email address: <span class="glyphicon glyphicon-user"></span></button>
+       <div id="mail-id" class="container animated col-md-12 flipInY alert alert-info">
+       <center><a href="mailto:yourchaitu@gmail.com?Subject=Contacting from portfolio" target="_blank">yourchaitu@gmail.com</a></center>
        </div>
-       <div><br/><h6>Note:Hey Please don't Spam my mail</h6></div></h3>
+       <div><br/><h6 class="alert alert-danger">Note:Hey Please don't Spam my mail</h6></div></h3>
     </div>
     <div class="col-md-6">
      <a type="button" href="https://github.com/chaituvr" target="_blank" class="btn btn-default "><i class="icon-github-sign icon-4x"></i><h3>&nbsp Github &nbsp </h3></a>
@@ -325,7 +369,7 @@ p {
       <div class="container-fluid panel-footer ">
         <div class="container text-muted">
         <center>
-          <a href="#mainImg"><span class="glyphicon glyphicon-home"></span> Home</a>
+          <a href="#home"><span class="glyphicon glyphicon-home"></span> Home</a>
   &nbsp &nbsp &nbsp &nbsp
           <a href="#abouta"><span class="glyphicon glyphicon-user"></span> About</a>
           &nbsp &nbsp &nbsp &nbsp
@@ -337,13 +381,13 @@ p {
         </div>
       </div>
     </footer>
-    
+  
     <script src='http://code.jquery.com/jquery-2.1.4.min.js'></script>
 <script src='http://code.jquery.com/ui/1.11.4/jquery-ui.min.js'></script>
 
         <script>
       $(document).ready(function(){
-// $("nav,#mainImg,#abouta,#portfolio").remove();
+//$("nav,#mainImg,#abouta,#portfolio").remove();
   welcome();
   $( window ).resize(function() {
   photo();
@@ -352,49 +396,29 @@ p {
   scroll(); 
   imgflip();
   mail();
-  $(".project").hover(
-  function() {
-    
-    $( this ).animate({
-    width: "265px",
-      height:"265px",
-    opacity: 0.8,
-  }, 100 );
-    $(this).addClass("animated swing");
-  }, function() {
-    $( this ).animate({
-    width: "260px",
-      height:"260px",
-    opacity: 1,
-  }, 100 );
-     $(this).removeClass("animated swing");
-  }
-);
-  $(window).scroll(function() {
-  var scrollTop = $(window).scrollTop();
-  if ( scrollTop > $('#abouta').offset().top - 300) { 
-    $('#abouta').addClass('blue');
-  } else {
-    if ($('#abouta').hasClass('blue')) {
-      $('#abouta').removeClass('blue');
-    }
-  }
-});
+  projectHover();
+  
+ 
+  
 });  
+
 var welcome=function(){
 $("button").addClass("animated rotateIn");
 $("nav").addClass("animated fadeInDown");
+
   $("#welcome").addClass("animated fadeInLeft");
   var delayimg=1;
   while (delayimg<100){
   $("#welcome").delay(4000).hide(3000);
   $("#welcome").delay(4000).show(3000);
+
   $("#smile").addClass("animated pulse")
     delayimg++
   }
   $("#homehead").addClass("animated fadeInUpBig")
   $("#homehead").addClass("animated fadeInUpBig")
 };
+
 var photo=function(){
   
   var wid=$(window).width();
@@ -403,7 +427,34 @@ var photo=function(){
   //$("#abouta").css("height",high+700);
 //$("#portfolio").css("height",high+70);
 };
+
+
 var scroll = function(){
+  
+  
+  $(window).scroll(function() {
+  var scrollTop = $(window).scrollTop();
+    var scrollBottom = $(document).height() - $(window).height() - $(window).scrollTop();
+    var top= $('#portfolio').offset().top-50;
+    //var bottom= $('#portfolio').outerHeight(true);
+    //console.log(scrollTop+" scrollTop "+top+" top "  +scrollBottom+" scrollBottom "+bottom+"   bottom");
+    
+  if ( scrollTop > top) { 
+    $('.project').removeClass('animated flipOutY');
+    $('.project').addClass('animated flipInY');
+  } else {
+    $('.project').addClass('animated flipOutY');
+    if ($('.project').hasClass('animated flipInY')) {
+      
+      $('.project').removeClass('animated flipInY');
+    }
+
+  }
+    
+});
+  
+  
+  /*
   $(document).ready(function(){
     $("#home").addClass("animated fadeInLeft")
           $("#about-lang").addClass("animated fadeInUp");
@@ -422,19 +473,24 @@ var scroll = function(){
     }
    
        });
-    });
+    });   */
 };
+
+
 var imgflip=function(){
+   
    $( ".hover" ).hover(
   function() {
     
-    $( this ).addClass("animated flip")
+    $( this ).addClass("animated flip ");
   }, function() {
-    $( this ).removeClass("animated flip");
+    
+    $( this ).removeClass("animated flip ");
   }
 );
   
 };
+
 var mail=function(){
    console.log("Hey Devloper.. Thanks for opening console .. :) if you want to develop something with me .. Mail me .. ")
   $("#mail-id").hide();
@@ -444,6 +500,33 @@ var mail=function(){
    
   });
   });
+};
+
+var projectHover =function(){
+  
+  $(".project").hover(
+  function() {
+    
+    $( this ).animate({
+    width: "265px",
+      height:"310px",
+    opacity: 0.8,
+  }, 100 );
+    
+    $(this).removeClass("flipInY flipOutY");
+    $(this).addClass("animated pulse codehover");
+ 
+    
+  }, function() {
+    
+    $( this ).animate({
+    width: "260px",
+      height:"300px",
+    opacity: 1,
+  }, 100 );
+     $(this).removeClass("pulse codehover");
+  }
+);
 };
       //@ sourceURL=pen.js
     </script>
