@@ -17,6 +17,10 @@ html, body {
     width: 100%;
     height:100%;
     font-family: 'Titillium Web', sans-serif;
+    .main-curve {
+      position: relative;
+      top: 6px;
+    }
   }
   .title {
     padding:45px 15px 0;
@@ -40,8 +44,7 @@ html, body {
   footer{
     background: black;
     width: 100%;
-    height: 40px;
-    padding: 15px 0;
+    height: 100px;
     a {
       color: #d939dc;
     }
