@@ -110,7 +110,13 @@
   .pill:hover { background: rgba(255,255,255,0.3); }
   .pill[aria-pressed="true"] { background: var(--white); color: var(--navy); border-color: var(--white); }
   .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .view.on .chips .pill, .view.on .ways .pill {
+  .cos { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.6rem; }
+  .cos .role { margin-right: 0.2rem; }
+  .co { padding: 0.45rem 0.95rem 0.45rem 0.6rem; gap: 0.5rem; }
+  .co img, .co svg { width: 1.4em; height: 1.4em; border-radius: 50%; flex: none; }
+  .co small { font-size: 0.82em; opacity: 0.7; font-variation-settings: "opsz" 24, "wdth" 92, "wght" 500; }
+  .co[aria-pressed="true"] { background: var(--yellow); color: var(--navy); border-color: var(--yellow); }
+  .view.on .chips .pill, .view.on .cos .pill, .view.on .ways .pill {
     animation: pop 0.7s var(--spring) backwards; animation-delay: calc(var(--i, 0) * 60ms + 250ms);
   }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -202,14 +208,14 @@
     .seg kbd { display: none; }
     .seg button { padding: 0.65rem 0.9rem; }
     .view { gap: 0.8rem; }
-    .chips {
+    .chips, .cos {
       flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none;
       width: 100vw; margin-left: calc(-1 * var(--pad)); padding: 0.25rem var(--pad);
       -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
       mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
     }
-    .chips::-webkit-scrollbar { display: none; }
-    .chips .pill { flex: none; }
+    .chips::-webkit-scrollbar, .cos::-webkit-scrollbar { display: none; }
+    .chips .pill, .cos > * { flex: none; }
   }
   @media (max-height: 30rem) { .name { font-size: clamp(3rem, 12vh, 6rem); } }
 </style>
@@ -229,7 +235,7 @@
     </section>
 
     <section class="view" id="view-work" aria-labelledby="work-h" hidden>
-      <p class="role" style="--i:0">Software engineer</p>
+      <div class="cos" id="cos" role="group" aria-label="Companies" style="--i:0"><span class="role">Work at</span></div>
       <h2 class="kinetic head" id="work-h" style="--i:1" data-text=""></h2>
       <p class="lead" id="work-desc" style="--i:2"></p>
       <div class="tags" id="work-tags" style="--i:3" aria-label="Technologies"></div>
@@ -434,26 +440,42 @@
     requestAnimationFrame(frame);
   }
 
-  /* Work items */
-  const work = [
-    { t: 'Voting strategies', d: 'Custom voting-power rules for DAOs. Merged into snapshot-strategies, most recently whitelisted delegation for Grove DAO.', tech: ['TypeScript', 'ethers.js', 'Multicall', 'EVM RPC', 'Subgraphs', 'snapshot.js', 'JSON Schema', 'Jest'] },
-    { t: 'Delegation infra', d: 'Delegate indexing on mainnet, Arbitrum and Starknet. Subgraphs, registries, and the APIs delegates actually read.', tech: ['The Graph', 'AssemblyScript', 'Checkpoint', 'Apollo', 'GraphQL', 'MySQL', 'Arbitrum', 'Starknet', 'OpenZeppelin Governor'] },
-    { t: 'Onchain voting', d: 'Snapshot X on Starknet and EVM. Spaces, proposals and votes settled onchain, indexed by Checkpoint, relayed through Mana.', tech: ['Starknet', 'Cairo', 'Solidity', 'starknet.js', 'viem', 'Checkpoint', 'Postgres', 'Zod', 'Pino', 'Docker'] },
-    { t: 'APIs and indexing', d: 'The hub, sequencer, score API and subgraphs. Public GraphQL that wallets, dashboards and delegates build on.', tech: ['Node.js', 'Express', 'GraphQL', 'Apollo', 'MySQL', 'Redis', 'Rate limiting', 'Prometheus', 'snapshot.js', 'Jest'] },
-    { t: 'Infra and billing', d: 'API keys and rate limits, RPC routing, avatars, webhooks and Discord bots. The plumbing that keeps snapshot.box up.', tech: ['Postgres', 'Redis', 'Stripe', 'AWS S3', 'IPFS', 'Sharp', 'Docker', 'GitHub Actions', 'Sentry', 'Discord API'] },
-    { t: 'Snapshot, every layer', d: '1,000+ merged PRs across the interface, SDK, sequencer, hub, scoring and billing.', link: ['See them on GitHub', 'https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests'], tech: ['Vue', 'Vite', 'Pinia', 'Tailwind', 'TypeScript', 'Vitest', 'Playwright', 'Turborepo', 'Bun', 'ESLint'] },
-    { t: 'Governance agents', d: 'A Snapshot MCP server so Claude and other agents can query, vote and propose. Claude Code hooks and routines that keep 25 repos merged.', tech: ['MCP', 'Claude Code', 'TypeScript', 'Zod', 'Node.js', 'Express', 'Bun', 'OpenAI API', 'GitHub Actions'] },
-    { t: 'Wallets and signatures', d: 'EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.', tech: ['EIP-712', 'ethers.js', 'viem', 'starknet.js', 'WalletConnect', 'Safe', 'Ledger', 'MetaMask', 'Solidity', 'Cairo'] },
-    { t: 'Before Snapshot', d: 'Four years before web3. Call-center tooling and data dashboards for Discover and TransUnion at Capgemini, PHP and jQuery at Innovate Apps before that.', tech: ['React', 'Redux', 'GraphQL', 'D3.js', 'Node.js', 'Express', 'Electron', 'Storybook', 'Jest', 'PHP', 'MySQL'] }
+  /* Work: companies, then areas */
+  const snapshotLogo = '<svg viewBox="0 0 300 300" fill="currentColor" aria-hidden="true"><path d="M200 300V100c55.228 0 100 44.772 100 100s-44.772 100-100 100Z"/><path d="M0 100C0 44.772 44.772 0 100 0v200C44.772 200 0 155.228 0 100Z"/><path d="M100 100h200V0H200c-55.229 0-100 44.772-100 100Z"/><path d="M200 200H0v100h100c55.229 0 100-44.772 100-100Z"/></svg>';
+  const companies = [
+    { name: 'Snapshot Labs', svg: snapshotLogo, areas: [
+      { t: 'Voting strategies', d: 'Custom voting-power rules for DAOs. Merged into snapshot-strategies, most recently whitelisted delegation for Grove DAO.', tech: ['TypeScript', 'ethers.js', 'Multicall', 'EVM RPC', 'Subgraphs', 'snapshot.js', 'JSON Schema', 'Jest'] },
+      { t: 'Delegation infra', d: 'Delegate indexing on mainnet, Arbitrum and Starknet. Subgraphs, registries, and the APIs delegates actually read.', tech: ['The Graph', 'AssemblyScript', 'Checkpoint', 'Apollo', 'GraphQL', 'MySQL', 'Arbitrum', 'Starknet', 'OpenZeppelin Governor'] },
+      { t: 'Onchain voting', d: 'Snapshot X on Starknet and EVM. Spaces, proposals and votes settled onchain, indexed by Checkpoint, relayed through Mana.', tech: ['Starknet', 'Cairo', 'Solidity', 'starknet.js', 'viem', 'Checkpoint', 'Postgres', 'Zod', 'Pino', 'Docker'] },
+      { t: 'APIs and indexing', d: 'The hub, sequencer, score API and subgraphs. Public GraphQL that wallets, dashboards and delegates build on.', tech: ['Node.js', 'Express', 'GraphQL', 'Apollo', 'MySQL', 'Redis', 'Rate limiting', 'Prometheus', 'snapshot.js', 'Jest'] },
+      { t: 'Infra and billing', d: 'API keys and rate limits, RPC routing, avatars, webhooks and Discord bots. The plumbing that keeps snapshot.box up.', tech: ['Postgres', 'Redis', 'Stripe', 'AWS S3', 'IPFS', 'Sharp', 'Docker', 'GitHub Actions', 'Sentry', 'Discord API'] },
+      { t: 'Snapshot, every layer', d: '1,000+ merged PRs across the interface, SDK, sequencer, hub, scoring and billing.', link: ['See them on GitHub', 'https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests'], tech: ['Vue', 'Vite', 'Pinia', 'Tailwind', 'TypeScript', 'Vitest', 'Playwright', 'Turborepo', 'Bun', 'ESLint'] },
+      { t: 'Governance agents', d: 'A Snapshot MCP server so Claude and other agents can query, vote and propose. Claude Code hooks and routines that keep 25 repos merged.', tech: ['MCP', 'Claude Code', 'TypeScript', 'Zod', 'Node.js', 'Express', 'Bun', 'OpenAI API', 'GitHub Actions'] },
+      { t: 'Wallets and signatures', d: 'EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.', tech: ['EIP-712', 'ethers.js', 'viem', 'starknet.js', 'WalletConnect', 'Safe', 'Ledger', 'MetaMask', 'Solidity', 'Cairo'] }
+    ] },
+    { name: 'Discover', sub: 'Capgemini', img: 'images/companies/discover.png', areas: [
+      { t: 'Call-center app', d: 'Action, the desktop app Discover’s card agents work in all day. Two years at Capgemini on its modules and the GraphQL server that fronts the bank’s services.', tech: ['React', 'Redux', 'GraphQL', 'Node.js', 'Electron', 'Material UI', 'Sass', 'JWT', 'Jest', 'Enzyme'] },
+      { t: 'Component library', d: 'Shared components picked up by teams across Discover, built from InVision screens, documented in Storybook and tested before they shipped.', tech: ['React', 'Storybook', 'Material UI', 'Sass', 'Jest', 'Enzyme', 'InVision', 'Postman'] }
+    ] },
+    { name: 'TransUnion', sub: 'Innovate Apps', img: 'images/companies/transunion.png', areas: [
+      { t: 'Data quality dashboard', d: 'ACCT, TransUnion’s internal dashboard scoring vendor feeds on accuracy, completeness, coverage and timeliness. D3 charts over GraphQL.', tech: ['React', 'Redux', 'D3.js', 'GraphQL', 'Node.js', 'Express', 'Bootstrap', 'Responsive design'] },
+      { t: 'Phone lookups', d: 'Real-time monitoring by phone number. One search fans out to six services and merges addresses, records and history into a single profile.', tech: ['React', 'Node.js', 'Express', 'REST', 'Bootstrap', 'HTML5', 'CSS3'] },
+      { t: 'Identity verification', d: 'IDxp for TLOxp: score the details, ask out-of-wallet questions, then confirm by voice or SMS. Zend on the server, jQuery in the browser.', tech: ['PHP', 'Zend', 'jQuery', 'AJAX', 'MySQL', 'Memcache', 'SOAP', 'REST', 'Swagger', 'Bootstrap'] }
+    ] }
   ];
+  const cos = $('#cos');
   const chips = $('#chips');
   const workH = $('#work-h');
   const workD = $('#work-desc');
   const workT = $('#work-tags');
+  let coIdx = 0;
   let workIdx = 0;
+  const centre = (row, el) => {
+    if (row.scrollWidth > row.clientWidth) el.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+  };
   const showWork = (i) => {
     workIdx = i;
-    const w = work[i];
+    const w = companies[coIdx].areas[i];
     setText(workH, w.t);
     workD.textContent = w.d + ' ';
     if (w.link) {
@@ -470,19 +492,39 @@
     }));
     chips.querySelectorAll('button').forEach((b, j) => {
       b.setAttribute('aria-pressed', String(j === i));
-      if (j === i && chips.scrollWidth > chips.clientWidth) b.scrollIntoView({ inline: 'center', block: 'nearest', behavior: reduce ? 'auto' : 'smooth' });
+      if (j === i) centre(chips, b);
     });
     kick = 2.5;
   };
-  work.forEach((w, i) => {
+  const showCompany = (ci) => {
+    coIdx = ci;
+    cos.querySelectorAll('button').forEach((b, j) => {
+      b.setAttribute('aria-pressed', String(j === ci));
+      if (j === ci) centre(cos, b);
+    });
+    chips.replaceChildren(...companies[ci].areas.map((w, i) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = 'pill'; b.textContent = w.t;
+      b.style.setProperty('--i', i);
+      b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', () => showWork(i));
+      return b;
+    }));
+    showWork(0);
+  };
+  companies.forEach((c, i) => {
     const b = document.createElement('button');
-    b.type = 'button'; b.className = 'pill'; b.textContent = w.t;
+    b.type = 'button'; b.className = 'pill co';
     b.style.setProperty('--i', i);
     b.setAttribute('aria-pressed', 'false');
-    b.addEventListener('click', () => showWork(i));
-    chips.append(b);
+    if (c.svg) b.innerHTML = c.svg;
+    else { const img = document.createElement('img'); img.src = c.img; img.alt = ''; img.width = 48; img.height = 48; b.append(img); }
+    const name = document.createElement('span'); name.textContent = c.name; b.append(name);
+    if (c.sub) { const sub = document.createElement('small'); sub.textContent = c.sub; b.append(sub); }
+    b.addEventListener('click', () => { if (i !== coIdx) showCompany(i); });
+    cos.append(b);
   });
-  showWork(0);
+  showCompany(0);
 
   /* Views */
   const views = { name: $('#view-name'), work: $('#view-work'), hi: $('#view-hi') };
@@ -520,7 +562,12 @@
     if (e.metaKey || e.ctrlKey || e.altKey) return;
     if (e.key === '1' || e.key === '2' || e.key === '3') show(order[+e.key - 1]);
     if (active === 'work' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
-      showWork((workIdx + (e.key === 'ArrowRight' ? 1 : work.length - 1)) % work.length);
+      const n = companies[coIdx].areas.length;
+      showWork((workIdx + (e.key === 'ArrowRight' ? 1 : n - 1)) % n);
+    }
+    if (active === 'work' && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+      e.preventDefault();
+      showCompany((coIdx + (e.key === 'ArrowDown' ? 1 : companies.length - 1)) % companies.length);
     }
   });
 
