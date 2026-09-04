@@ -278,7 +278,7 @@
   document.querySelectorAll('.kinetic[data-text]').forEach(el => { if (el.dataset.text) setText(el, el.dataset.text); });
 
   /* Stack marquee: two identical tracks for a seamless loop */
-  const stack = ['TypeScript', 'Node.js', 'Vue', 'Vite', 'GraphQL', 'Express', 'MySQL', 'Postgres', 'Redis', 'Solidity', 'Cairo', 'Ethereum', 'Starknet', 'Arbitrum', 'The Graph', 'Checkpoint', 'ethers.js', 'viem', 'starknet.js', 'EIP-712', 'MCP', 'Zod', 'Docker', 'GitHub Actions', 'AWS S3', 'IPFS', 'Playwright', 'Vitest', 'Tailwind'];
+  const stack = ['TypeScript', 'Node.js', 'Vue', 'Vite', 'GraphQL', 'Express', 'MySQL', 'Postgres', 'Redis', 'Solidity', 'Cairo', 'Ethereum', 'Starknet', 'Arbitrum', 'The Graph', 'Checkpoint', 'ethers.js', 'viem', 'starknet.js', 'EIP-712', 'MCP', 'Zod', 'Docker', 'GitHub Actions', 'AWS S3', 'IPFS', 'Playwright', 'Vitest', 'Tailwind', 'React'];
   $('#stack').replaceChildren(...[0, 1].map(() => {
     const track = document.createElement('div');
     track.className = 'track';
@@ -435,7 +435,8 @@
     { t: 'Infra and billing', d: 'API keys and rate limits, RPC routing, avatars, webhooks and Discord bots. The plumbing that keeps snapshot.box up.', tech: ['Postgres', 'Redis', 'AWS S3', 'IPFS', 'Docker', 'GitHub Actions'] },
     { t: 'Snapshot, every layer', d: '1,000+ merged PRs across the interface, SDK, sequencer, hub, scoring and billing.', link: ['See them on GitHub', 'https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests'], tech: ['Vue', 'Vite', 'Tailwind', 'TypeScript', 'Vitest', 'Playwright'] },
     { t: 'Governance agents', d: 'A Snapshot MCP server so Claude and other agents can query, vote and propose. Claude Code hooks and routines that keep 25 repos merged.', tech: ['MCP', 'Claude Code', 'TypeScript', 'Zod', 'Node.js'] },
-    { t: 'Wallets and signatures', d: 'EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.', tech: ['EIP-712', 'ethers.js', 'starknet.js', 'Ledger', 'Solidity', 'Cairo'] }
+    { t: 'Wallets and signatures', d: 'EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.', tech: ['EIP-712', 'ethers.js', 'starknet.js', 'Ledger', 'Solidity', 'Cairo'] },
+    { t: 'Before Snapshot', d: 'Four years before web3. Call-center tooling and data dashboards for Discover and TransUnion at Capgemini, PHP and jQuery at Innovate Apps before that.', tech: ['React', 'Redux', 'GraphQL', 'D3.js', 'Node.js', 'PHP'] }
   ];
   const chips = $('#chips');
   const workH = $('#work-h');
