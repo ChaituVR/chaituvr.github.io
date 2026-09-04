@@ -207,7 +207,6 @@
     font-variation-settings: "opsz" 24, "wdth" 92, "wght" 600; transition: color 0.3s;
   }
   .seg button[aria-selected="true"] { color: var(--navy); }
-  .seg kbd { font: inherit; font-size: 0.75em; opacity: 0.55; margin-left: 0.45rem; }
 
   @media (prefers-reduced-motion: reduce) {
     .view.on > *, .view.off > *, .kinetic span, .tag, .view.on .pill, .wipe.go, .hi-card, .burst span,
@@ -219,7 +218,6 @@
     .marquee .track + .track { display: none; }
   }
   @media (max-width: 40rem) {
-    .seg kbd { display: none; }
     .seg button { padding: 0.65rem 0.9rem; }
     .view { gap: 0.8rem; }
     .chips {
@@ -262,10 +260,10 @@
       <p class="lead" style="--i:1">Remote, IST, fast replies. DMs open.</p>
       <div class="ways" id="ways" style="--i:2">
         <a class="pill" style="--i:0" href="https://t.me/chaituvr" target="_blank" rel="noopener">Telegram</a>
-        <button class="pill" style="--i:1" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
-        <a class="pill" style="--i:2" href="https://x.com/chaituvr_s" target="_blank" rel="noopener">X</a>
-        <a class="pill" style="--i:3" href="https://linkedin.com/in/chaituvr" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="pill" style="--i:4" href="https://github.com/ChaituVR" target="_blank" rel="noopener">GitHub</a>
+        <a class="pill" style="--i:1" href="https://x.com/chaituvr_s" target="_blank" rel="noopener">X</a>
+        <a class="pill" style="--i:2" href="https://linkedin.com/in/chaituvr" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="pill" style="--i:3" href="https://github.com/ChaituVR" target="_blank" rel="noopener">GitHub</a>
+        <button class="pill" style="--i:4" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
       </div>
     </section>
   </div>
@@ -275,9 +273,9 @@
 
   <nav class="dock" aria-label="Sections">
     <div class="seg" role="tablist" id="seg" style="--sel:0">
-      <button role="tab" aria-selected="true" data-view="name">Chaitu<kbd>1</kbd></button>
-      <button role="tab" aria-selected="false" data-view="work">Work<kbd>2</kbd></button>
-      <button role="tab" aria-selected="false" data-view="hi">Say hi<kbd>3</kbd></button>
+      <button role="tab" aria-selected="true" data-view="name">Chaitu</button>
+      <button role="tab" aria-selected="false" data-view="work">Work</button>
+      <button role="tab" aria-selected="false" data-view="hi">Say hi</button>
     </div>
   </nav>
 
