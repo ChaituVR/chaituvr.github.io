@@ -98,7 +98,10 @@
     font-variation-settings: "opsz" 48, "wdth" 95, "wght" 500;
   }
   .lead a { text-decoration-thickness: 2px; text-underline-offset: 0.15em; color: var(--yellow); }
-  .hint { margin: 0; font-size: 0.95rem; opacity: 0.8; font-variation-settings: "opsz" 24, "wdth" 92, "wght" 500; }
+  .role {
+    margin: 0; color: var(--yellow); letter-spacing: -0.01em;
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem); font-variation-settings: "opsz" 48, "wdth" 92, "wght" 650;
+  }
 
   .pill {
     display: inline-flex; align-items: center; gap: 0.5rem;
@@ -225,7 +228,7 @@
     </section>
 
     <section class="view" id="view-work" aria-labelledby="work-h" hidden>
-      <p class="hint" style="--i:0">What I work on</p>
+      <p class="role" style="--i:0">Software engineer</p>
       <h2 class="kinetic head" id="work-h" style="--i:1" data-text=""></h2>
       <p class="lead" id="work-desc" style="--i:2"></p>
       <div class="tags" id="work-tags" style="--i:3" aria-label="Technologies"></div>
