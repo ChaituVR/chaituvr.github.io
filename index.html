@@ -54,9 +54,8 @@
     background: linear-gradient(to top, rgba(14, 15, 92, 0.8) 0%, rgba(14, 15, 92, 0.3) 40%, transparent 65%);
   }
 
-  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.4rem var(--pad) 0; pointer-events: none; }
+  .top { display: flex; justify-content: flex-end; align-items: center; padding: 1.4rem var(--pad) 0; pointer-events: none; }
   .top > * { pointer-events: auto; }
-  .mark { font-variation-settings: "opsz" 24, "wdth" 90, "wght" 700; text-decoration: none; letter-spacing: -0.01em; }
   .since { font-size: 0.9rem; opacity: 0.85; font-variation-settings: "opsz" 24, "wdth" 90, "wght" 500; }
 
   .views { position: relative; pointer-events: none; }
@@ -215,7 +214,6 @@
   <div class="fallback" aria-hidden="true" hidden></div>
 
   <div class="top">
-    <a class="mark" href="/">Chaitu</a>
     <span class="since">Snapshot core team since 2020</span>
   </div>
 
