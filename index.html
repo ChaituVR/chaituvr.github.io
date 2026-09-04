@@ -3,503 +3,400 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chaitanya (Chaitu) — governance infrastructure engineer</title>
-<meta name="description" content="On Snapshot's core team since 2020. 1,000+ merged PRs across every layer of the stack. Open for contract work in DAO governance infrastructure.">
-<meta property="og:title" content="Chaitanya (Chaitu) — governance infrastructure engineer">
-<meta property="og:description" content="On Snapshot's core team since 2020. 1,000+ merged PRs across every layer of the stack. Open for contract work.">
+<title>Chaitu — governance infrastructure engineer</title>
+<meta name="description" content="Chaitu builds governance infrastructure. Snapshot core team since 2020. Voting strategies, delegation, agents. Open for contract work.">
+<meta property="og:title" content="Chaitu — governance infrastructure engineer">
+<meta property="og:description" content="Snapshot core team since 2020. Voting strategies, delegation, agents. Open for contract work.">
 <meta property="og:url" content="https://chaituvr.github.io/">
+<meta name="theme-color" content="#2A2BFF">
 <link rel="icon" href="/images/favicons/favicon-96x96.png" type="image/png">
 <link rel="apple-touch-icon" href="/images/favicons/apple-icon-180x180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
 <style>
   :root {
-    --paper: #F6F7F4;
-    --card: #FFFFFF;
-    --ink: #14213D;
-    --muted: #5A6270;
-    --rule: #D9DDD6;
-    --accent: #2F6B3F;
-    --accent-soft: #DCE9DF;
-    --against: #9B4A3A;
-    --against-soft: #EFDDD8;
-    --abstain: #7C7F8A;
-    --abstain-soft: #E4E5E8;
-    --measure: 40rem;
+    --blue: #2A2BFF;
+    --coral: #FF6A3D;
+    --peach: #FFD3B8;
+    --cream: #FFF3EA;
+    --yellow: #F7EC4F;
+    --navy: #0E0F5C;
+    --white: #FFFFFF;
   }
   * { box-sizing: border-box; }
-  html { background: var(--paper); color: var(--ink); scroll-behavior: smooth; }
+  html { background: var(--blue); color: var(--white); scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, system-ui, sans-serif;
-    font-size: 17px;
-    line-height: 1.55;
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, system-ui, sans-serif;
+    font-variation-settings: "opsz" 24, "wdth" 100, "wght" 400;
+    font-size: clamp(1rem, 1.1vw + 0.6rem, 1.25rem);
+    line-height: 1.4;
     -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  a { color: var(--accent); text-decoration: underline; text-underline-offset: 0.15em; text-decoration-thickness: 1px; }
-  a:hover { text-decoration-thickness: 2px; }
-  a:focus-visible, button:focus-visible, summary:focus-visible, label:focus-within { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 2px; }
+  a { color: inherit; }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 999px; }
   button { font: inherit; color: inherit; }
 
-  .page { max-width: 54rem; margin: 0 auto; padding: 2rem 1.5rem 5rem; }
+  /* Hero */
+  .hero { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; isolation: isolate; }
+  #tunnel { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
+  .hero-fallback {
+    position: absolute; inset: 0; z-index: -2;
+    background: radial-gradient(circle at 60% 45%, var(--white) 0, var(--peach) 8%, var(--coral) 30%, var(--blue) 65%);
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+    background: linear-gradient(to top, rgba(14, 15, 92, 0.75) 0%, rgba(14, 15, 92, 0.25) 35%, transparent 60%);
+  }
+  .top {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+    padding: 1.5rem clamp(1.25rem, 4vw, 3.5rem);
+  }
+  .mark { font-variation-settings: "opsz" 24, "wdth" 90, "wght" 700; text-decoration: none; letter-spacing: -0.01em; }
+  .top nav { display: flex; gap: 0.5rem; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.55rem 1rem; border-radius: 999px; text-decoration: none;
+    background: rgba(255,255,255,0.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.28); font-variation-settings: "opsz" 24, "wdth" 95, "wght" 500;
+    transition: background 0.25s, transform 0.25s cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
+  }
+  .pill:hover { background: rgba(255,255,255,0.28); }
+  .pill.solid { background: var(--white); color: var(--navy); border-color: var(--white); }
+  .pill.solid:hover { background: var(--yellow); border-color: var(--yellow); }
 
-  header {
-    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; flex-wrap: wrap;
-    padding-bottom: 1rem; margin-bottom: 3rem;
+  .title { align-self: end; padding: 0 clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 6vh, 4rem); }
+  .name {
+    margin: 0; line-height: 0.86; letter-spacing: -0.045em;
+    font-size: clamp(4.5rem, 18vw, 15rem);
+    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
+    display: flex; flex-wrap: wrap;
   }
-  header .name { font-weight: 700; color: var(--ink); text-decoration: none; }
-  header nav { display: flex; gap: 1.25rem; }
-  header nav a { color: var(--ink); text-decoration: none; }
-  header nav a:hover { text-decoration: underline; }
+  .name span {
+    display: inline-block;
+    font-variation-settings: "opsz" 96, "wdth" 75, "wght" 200;
+    opacity: 0; transform: translateY(0.25em);
+    animation: letter 1.1s cubic-bezier(.2,.9,.2,1) forwards;
+    animation-delay: calc(var(--i) * 70ms + 200ms);
+    transition: font-variation-settings 0.5s cubic-bezier(.2,.8,.2,1);
+  }
+  .name:hover span { font-variation-settings: "opsz" 96, "wdth" 85, "wght" 500; }
+  .name:hover span:hover { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
+  @keyframes letter {
+    to { opacity: 1; transform: translateY(0); font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
+  }
+  .role {
+    margin: 1.25rem 0 0; max-width: 44rem;
+    font-size: clamp(1.35rem, 3.2vw, 2.5rem); line-height: 1.12; letter-spacing: -0.02em;
+    font-variation-settings: "opsz" 48, "wdth" 95, "wght" 500;
+    opacity: 0; animation: rise 1s cubic-bezier(.2,.9,.2,1) 0.9s forwards;
+  }
+  @keyframes rise { from { opacity: 0; transform: translateY(0.6rem); } to { opacity: 1; transform: none; } }
+  .roll {
+    display: inline-grid; vertical-align: bottom; overflow: hidden; height: 1.12em;
+    color: var(--yellow);
+  }
+  .roll > b {
+    grid-area: 1 / 1; font-weight: inherit; white-space: nowrap;
+    transform: translateY(110%); opacity: 0;
+    transition: transform 0.55s cubic-bezier(.2,.9,.2,1), opacity 0.3s;
+  }
+  .roll > b.in { transform: translateY(0); opacity: 1; }
+  .roll > b.out { transform: translateY(-110%); opacity: 0; }
 
-  /* Proposal */
-  .proposal {
-    display: grid; grid-template-columns: minmax(0, 1fr) 19rem; gap: 2.5rem 3rem;
-    margin: 0 0 4.5rem;
+  .scroll-hint {
+    padding: 0 clamp(1.25rem, 4vw, 3.5rem) 1.5rem; display: flex; justify-content: space-between; align-items: end;
+    font-size: 0.9rem; opacity: 0.85;
+    font-variation-settings: "opsz" 24, "wdth" 90, "wght" 500;
   }
-  .proposal-body { min-width: 0; }
-  .state { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.9375rem; margin: 0 0 0.75rem; }
-  .state::before { content: ""; width: 0.55rem; height: 0.55rem; border-radius: 50%; background: var(--accent); }
-  .state.closed::before { background: var(--muted); }
-  h1 {
-    font-size: clamp(1.9rem, 4.8vw, 2.75rem);
-    line-height: 1.1;
-    letter-spacing: -0.02em;
-    font-weight: 700;
-    margin: 0 0 1rem;
-  }
-  .lede { font-size: clamp(1.1rem, 2vw, 1.3rem); line-height: 1.4; margin: 0 0 1.25rem; max-width: var(--measure); }
-  .lede a { color: inherit; }
-  .proposal-meta { color: var(--muted); font-size: 0.9375rem; margin: 0; }
-  .proposal-meta a { color: var(--muted); }
+  .scroll-hint .bob { display: inline-block; animation: bob 1.8s ease-in-out infinite; }
+  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(0.35rem); } }
 
-  .ballot {
-    background: var(--card); border: 1px solid var(--rule); border-radius: 6px;
-    padding: 1.25rem; align-self: start;
+  /* Work */
+  .work { background: var(--cream); color: var(--navy); padding: clamp(4rem, 12vh, 8rem) clamp(1.25rem, 4vw, 3.5rem); }
+  .work h2, .contact h2 {
+    margin: 0 0 clamp(1.5rem, 4vh, 3rem);
+    font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.3;
+    font-variation-settings: "opsz" 24, "wdth" 95, "wght" 500; max-width: 40rem;
   }
-  .ballot h2 { font-size: 1.05rem; margin: 0 0 1rem; display: flex; justify-content: space-between; align-items: baseline; }
-  .vp { font-weight: 400; color: var(--muted); font-size: 0.9375rem; font-variant-numeric: tabular-nums; }
-  .vp b { color: var(--ink); font-weight: 500; }
-  .choices { display: grid; gap: 0.5rem; margin: 0 0 1rem; }
-  .choice {
-    display: flex; align-items: center; gap: 0.75rem; cursor: pointer;
-    border: 1px solid var(--rule); border-radius: 4px; padding: 0.65rem 0.85rem;
+  .lines { list-style: none; margin: 0; padding: 0; }
+  .lines li {
+    border-top: 2px solid var(--navy);
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 24rem); gap: 1rem 2rem; align-items: start;
+    padding: clamp(1rem, 2.5vh, 1.6rem) 0;
+    opacity: 0; transform: translateY(1.5rem);
+    transition: opacity 0.8s cubic-bezier(.2,.9,.2,1), transform 0.8s cubic-bezier(.2,.9,.2,1);
+    transition-delay: calc(var(--i) * 90ms);
   }
-  .choice:hover { border-color: var(--ink); }
-  .choice input { margin: 0; accent-color: var(--ink); width: 1rem; height: 1rem; }
-  .choice:has(input:checked) { border-color: var(--ink); box-shadow: inset 0 0 0 1px var(--ink); }
-  .choice strong { font-weight: 500; }
-  .choice span { color: var(--muted); font-size: 0.9375rem; }
-  .cast {
-    width: 100%; background: var(--ink); color: var(--paper); border: 0; border-radius: 4px;
-    padding: 0.75rem 1rem; font-weight: 500; cursor: pointer;
+  .lines li:last-child { border-bottom: 2px solid var(--navy); }
+  .lines li.show { opacity: 1; transform: none; }
+  .lines strong {
+    display: block; font-size: clamp(1.8rem, 5vw, 4.25rem); line-height: 1; letter-spacing: -0.035em;
+    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 700;
+    background: linear-gradient(90deg, var(--navy), var(--navy)) no-repeat 0 100% / 0% 0.08em;
+    transition: font-variation-settings 0.5s cubic-bezier(.2,.8,.2,1);
   }
-  .cast:hover { background: var(--accent); }
-  .cast:disabled { background: var(--rule); color: var(--muted); cursor: not-allowed; }
-  .strategy { color: var(--muted); font-size: 0.85rem; margin: 0.75rem 0 0; }
+  .lines li:hover strong { font-variation-settings: "opsz" 96, "wdth" 82, "wght" 800; color: var(--blue); }
+  .lines span { font-size: clamp(0.95rem, 1.3vw, 1.15rem); max-width: 22rem; line-height: 1.35; }
+  .lines span a { color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
+  .work .foot { margin: 2rem 0 0; font-variation-settings: "opsz" 24, "wdth" 95, "wght" 500; }
+  .work .foot a { color: var(--blue); }
 
-  /* Results */
-  .results { margin-top: 1.25rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
-  .results h3 { font-size: 0.9375rem; font-weight: 500; margin: 0 0 0.6rem; color: var(--muted); }
-  .result { display: grid; grid-template-columns: 4.5rem 1fr 3rem; gap: 0.6rem; align-items: center; font-size: 0.9375rem; margin-bottom: 0.4rem; font-variant-numeric: tabular-nums; }
-  .result .track { height: 0.55rem; background: var(--abstain-soft); border-radius: 2px; overflow: hidden; }
-  .result .fill { display: block; height: 100%; width: 0; background: var(--abstain); border-radius: 2px; transition: width 0.6s cubic-bezier(.2,.7,.2,1); }
-  .result.for .fill { background: var(--accent); }
-  .result.against .fill { background: var(--against); }
-  .result .pct { text-align: right; }
-  .receipt { font-size: 0.85rem; color: var(--muted); margin: 0.75rem 0 0; overflow-wrap: anywhere; }
-  .outcome { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--rule); font-size: 0.9375rem; }
-  .outcome p { margin: 0 0 0.75rem; }
-  .outcome .cta { display: inline-block; background: var(--accent); color: var(--paper); text-decoration: none; padding: 0.55rem 0.9rem; border-radius: 4px; font-weight: 500; margin-right: 0.5rem; }
-  .outcome .cta:hover { background: var(--ink); }
+  /* Contact */
+  .contact {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: var(--navy); color: var(--white);
+    min-height: 100svh; display: grid; align-content: center;
+    padding: clamp(4rem, 12vh, 8rem) clamp(1.25rem, 4vw, 3.5rem);
+  }
+  .orb {
+    position: absolute; z-index: -1; width: min(70vw, 34rem); aspect-ratio: 1; border-radius: 50%;
+    left: 76%; top: 50%; transform: translate(-50%, -50%);
+    background: radial-gradient(circle at 35% 30%, var(--white) 0, var(--peach) 14%, var(--coral) 45%, var(--blue) 75%, transparent 76%);
+    filter: blur(0.5px); will-change: transform;
+  }
+  .contact h2 { color: var(--white); max-width: 30rem; }
+  .big {
+    margin: 0 0 2rem; letter-spacing: -0.04em; line-height: 0.9;
+    font-size: clamp(3rem, 12vw, 10rem);
+    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
+  }
+  .ways { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .ways .pill { font-size: clamp(1rem, 1.6vw, 1.35rem); padding: 0.85rem 1.4rem; border-width: 2px; }
+  .ways .pill:hover { background: var(--white); color: var(--navy); }
+  .ways button.pill { cursor: pointer; }
+  .fine { margin: 2.5rem 0 0; opacity: 0.8; font-size: 0.95rem; }
 
-  /* Sign sheet */
-  dialog {
-    border: 1px solid var(--rule); border-radius: 8px; padding: 0; max-width: 26rem; width: calc(100% - 2rem);
-    background: var(--card); color: var(--ink);
-  }
-  dialog::backdrop { background: rgba(20, 33, 61, 0.45); }
-  .sheet { padding: 1.25rem; }
-  .sheet h2 { font-size: 1.05rem; margin: 0 0 0.25rem; }
-  .sheet p { margin: 0 0 1rem; color: var(--muted); font-size: 0.9375rem; }
-  .sheet pre {
-    background: var(--paper); border: 1px solid var(--rule); border-radius: 4px;
-    padding: 0.85rem; font-size: 0.78rem; line-height: 1.45; overflow: auto; max-height: 18rem; margin: 0 0 1rem;
-    white-space: pre-wrap; word-break: break-all;
-  }
-  .sheet-actions { display: flex; gap: 0.5rem; justify-content: flex-end; }
-  .sheet-actions button { border-radius: 4px; padding: 0.6rem 1rem; cursor: pointer; font-weight: 500; }
-  .sheet-actions .cancel { background: transparent; border: 1px solid var(--rule); }
-  .sheet-actions .sign { background: var(--ink); color: var(--paper); border: 0; }
-  .sheet-actions .sign:hover { background: var(--accent); }
-
-  /* The stack */
-  .stack { margin: 0 0 4.5rem; }
-  .stack h2 { font-size: 1.375rem; margin: 0 0 0.25rem; letter-spacing: -0.01em; }
-  .stack-caption { color: var(--muted); font-size: 0.9375rem; margin: 0 0 0.75rem; }
-  .stack details { border-top: 1px solid var(--rule); }
-  .stack details:last-of-type { border-bottom: 1px solid var(--rule); }
-  .stack summary {
-    display: grid; grid-template-columns: 9rem 1fr 13rem 3.5rem; gap: 1.25rem; align-items: center;
-    padding: 0.8rem 0; cursor: pointer; list-style: none;
-  }
-  .stack summary::-webkit-details-marker { display: none; }
-  .stack summary:hover .layer { text-decoration: underline; text-underline-offset: 0.15em; }
-  .layer { font-weight: 500; }
-  .layer::before { content: "+"; display: inline-block; width: 1.1rem; color: var(--muted); }
-  details[open] .layer::before { content: "–"; }
-  .repos { color: var(--muted); font-size: 0.9375rem; line-height: 1.4; }
-  .bar { height: 0.7rem; background: var(--accent-soft); border-radius: 2px; overflow: hidden; }
-  .bar i { display: block; height: 100%; background: var(--accent); border-radius: 2px; transform-origin: left; transform: scaleX(var(--w)); }
-  .count { text-align: right; font-variant-numeric: tabular-nums; font-weight: 500; }
-  .prs { list-style: none; margin: 0; padding: 0 0 1rem 1.1rem; }
-  .prs li { padding: 0.25rem 0; font-size: 0.9375rem; }
-  .prs a { color: var(--ink); text-decoration-color: var(--rule); }
-  .prs a:hover { text-decoration-color: var(--ink); }
-  .prs .all { color: var(--muted); }
-  .stack-total { display: flex; justify-content: space-between; gap: 1rem; padding-top: 0.8rem; color: var(--muted); font-size: 0.9375rem; flex-wrap: wrap; }
-  .stack-total a { color: var(--muted); }
-
-  @media (prefers-reduced-motion: no-preference) {
-    .bar i { animation: grow 0.7s cubic-bezier(.2,.7,.2,1) both; animation-delay: calc(var(--i) * 60ms + 150ms); }
-    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(var(--w)); } }
-  }
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
-    .result .fill { transition: none; }
-  }
-
-  /* Availability */
-  .available {
-    display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
-    padding: 1.5rem 0; margin: 0 0 4.5rem;
-    border-top: 3px solid var(--ink); border-bottom: 1px solid var(--rule);
-  }
-  .available p { margin: 0; font-size: 1.25rem; font-weight: 500; flex: 1 1 18rem; }
-  .available small { display: block; font-size: 0.9375rem; font-weight: 400; color: var(--muted); margin-top: 0.15rem; }
-  .available .cta { display: inline-block; background: var(--ink); color: var(--paper); text-decoration: none; padding: 0.7rem 1.1rem; border-radius: 3px; font-weight: 500; white-space: nowrap; }
-  .available .cta:hover { background: var(--accent); }
-
-  section { margin: 0 0 4rem; max-width: var(--measure); }
-  section h2 { font-size: 1.375rem; line-height: 1.25; margin: 0 0 1rem; letter-spacing: -0.01em; }
-  .work { list-style: none; margin: 0; padding: 0; }
-  .work li { padding: 0.9rem 0; border-top: 1px solid var(--rule); }
-  .work li:last-child { border-bottom: 1px solid var(--rule); }
-  .work strong { display: block; font-weight: 500; }
-  .work span { color: var(--muted); font-size: 0.9375rem; }
-  section p { margin: 0 0 1rem; }
-
-  footer { color: var(--muted); font-size: 0.9375rem; max-width: var(--measure); }
-  footer p { margin: 0 0 0.4rem; }
-
-  @media (max-width: 52rem) {
-    .proposal { grid-template-columns: 1fr; }
+    .name span, .role { animation: none; opacity: 1; transform: none; font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
+    .role { font-variation-settings: "opsz" 48, "wdth" 95, "wght" 500; }
+    .lines li { opacity: 1; transform: none; transition: none; }
+    .scroll-hint .bob { animation: none; }
+    .roll > b { transition: none; }
+    .pill { transition: none; }
   }
   @media (max-width: 40rem) {
-    .page { padding-top: 1.25rem; }
-    header nav { gap: 1rem; font-size: 0.9375rem; }
-    .stack summary {
-      grid-template-columns: 1fr 3rem;
-      grid-template-areas: "layer count" "repos repos" "bar bar";
-      gap: 0.3rem 1rem;
-    }
-    .layer { grid-area: layer; }
-    .repos { grid-area: repos; padding-left: 1.1rem; }
-    .bar { grid-area: bar; margin-top: 0.35rem; }
-    .count { grid-area: count; }
+    .top nav .pill:not(.solid) { display: none; }
+    .lines li { grid-template-columns: 1fr; gap: 0.5rem; }
+    .orb { width: 60vw; left: 84%; top: 12%; }
   }
 </style>
 </head>
 <body>
-<div class="page">
-  <header>
-    <a class="name" href="/">Chaitu</a>
-    <nav aria-label="Elsewhere">
-      <a href="https://github.com/ChaituVR">GitHub</a>
-      <a href="https://x.com/chaituvr_s">X</a>
-      <a href="https://linkedin.com/in/chaituvr">LinkedIn</a>
-      <a href="https://t.me/chaituvr">Telegram</a>
+
+<section class="hero">
+  <canvas id="tunnel" aria-hidden="true"></canvas>
+  <div class="hero-fallback" aria-hidden="true" hidden></div>
+
+  <div class="top">
+    <a class="mark" href="/">Chaitu</a>
+    <nav aria-label="Contact">
+      <a class="pill" href="https://github.com/ChaituVR">GitHub</a>
+      <a class="pill" href="https://x.com/chaituvr_s">X</a>
+      <a class="pill solid" href="https://t.me/chaituvr">Say hi</a>
     </nav>
-  </header>
+  </div>
 
-  <main>
-    <article class="proposal">
-      <div class="proposal-body">
-        <p class="state" id="state">Active</p>
-        <h1>Bring Chaitanya in to build your governance infrastructure</h1>
-        <p class="lede">On the core team at <a href="https://snapshot.box">Snapshot</a>, the voting layer most DAOs run on, since December 2020. Over a thousand merged pull requests, and not in one corner of the codebase: every layer, from the wallet signature to the results page.</p>
-        <p class="proposal-meta">Basic voting. Quorum: one conversation. <a href="#stack">Read the work below</a>, then vote. Voting again replaces your previous vote, like it should.</p>
-      </div>
+  <div class="title">
+    <h1 class="name" aria-label="Chaitu">
+      <span style="--i:0">C</span><span style="--i:1">h</span><span style="--i:2">a</span><span style="--i:3">i</span><span style="--i:4">t</span><span style="--i:5">u</span>
+    </h1>
+    <p class="role">Builds governance infrastructure.<br>Right now: <span class="roll" id="roll" aria-live="polite"><b class="in">voting strategies</b><b>delegation on L2s</b><b>governance agents</b><b>every layer of Snapshot</b><b>your DAO's next problem</b></span></p>
+  </div>
 
-      <aside class="ballot" aria-label="Cast your vote">
-        <h2>Cast your vote <span class="vp">Voting power <b id="vp">1</b></span></h2>
-        <form id="ballot" class="choices">
-          <label class="choice"><input type="radio" name="choice" value="1"><span><strong>For</strong><br><span>Let's talk about the work</span></span></label>
-          <label class="choice"><input type="radio" name="choice" value="2"><span><strong>Against</strong><br><span>Not what I need right now</span></span></label>
-          <label class="choice"><input type="radio" name="choice" value="3"><span><strong>Abstain</strong><br><span>Just looking around</span></span></label>
-        </form>
-        <button class="cast" id="cast" type="button" disabled>Vote</button>
-        <p class="strategy">Strategy: time-on-page. One voting power per second you spend here. No wallet needed.</p>
+  <div class="scroll-hint">
+    <span class="bob">↓ what I work on</span>
+    <span>Snapshot core team since 2020</span>
+  </div>
+</section>
 
-        <div class="results" id="results" hidden>
-          <h3 id="results-title">Results</h3>
-          <div class="result for"><span>For</span><span class="track"><i class="fill" data-choice="1"></i></span><span class="pct" data-pct="1">0%</span></div>
-          <div class="result against"><span>Against</span><span class="track"><i class="fill" data-choice="2"></i></span><span class="pct" data-pct="2">0%</span></div>
-          <div class="result abstain"><span>Abstain</span><span class="track"><i class="fill" data-choice="3"></i></span><span class="pct" data-pct="3">0%</span></div>
-          <p class="receipt" id="receipt"></p>
-          <div class="outcome" id="outcome"></div>
-        </div>
-      </aside>
-    </article>
+<section class="work" id="work">
+  <h2>What I work on. Most of it is public, all of it shipped.</h2>
+  <ul class="lines" id="lines">
+    <li style="--i:0"><strong>Voting strategies</strong><span>Custom voting-power rules for DAOs. Dozens merged into snapshot-strategies, latest for Grove DAO's whitelisted delegation.</span></li>
+    <li style="--i:1"><strong>Delegation infra</strong><span>Delegate indexing on mainnet, Arbitrum and Starknet. Subgraphs, registries, the APIs delegates actually read.</span></li>
+    <li style="--i:2"><strong>Snapshot, every layer</strong><span>1,000+ merged PRs across the interface, SDK, sequencer, hub, scoring and billing. <a href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests">See them on GitHub</a>.</span></li>
+    <li style="--i:3"><strong>Governance agents</strong><span>A Snapshot MCP server so Claude and other agents can query, vote and propose. Claude Code hooks and routines that keep 25 repos merged.</span></li>
+    <li style="--i:4"><strong>Wallets and signatures</strong><span>EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.</span></li>
+  </ul>
+  <p class="foot">Vue, TypeScript, Node, GraphQL, subgraphs. Solidity and Cairo when the job needs them. <a href="#contact">Get in touch ↓</a></p>
+</section>
 
-    <dialog id="sheet" aria-labelledby="sheet-title">
-      <div class="sheet">
-        <h2 id="sheet-title">Sign message</h2>
-        <p>This is the exact shape Snapshot asks your wallet to sign for a vote. Here it costs nothing and goes nowhere.</p>
-        <pre id="typed-data"></pre>
-        <div class="sheet-actions">
-          <button type="button" class="cancel" id="cancel">Cancel</button>
-          <button type="button" class="sign" id="sign">Sign</button>
-        </div>
-      </div>
-    </dialog>
-
-    <figure class="stack" id="stack" aria-labelledby="stack-title">
-      <h2 id="stack-title">Merged pull requests by layer</h2>
-      <figcaption class="stack-caption">snapshot-labs org, December 2020 to today. Open a layer for a few examples.</figcaption>
-
-      <details style="--w:1; --i:0">
-        <summary>
-          <span class="layer">Interface</span>
-          <span class="repos">sx-monorepo, snapshot-v1</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">397</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/snapshot-v1/pull/172">Add 3Box profile integration to the Snapshot app</a> <span class="all">(first PR, Dec 2020)</span></li>
-          <li><a href="https://github.com/snapshot-labs/sx-monorepo/pull/116">Fix wallet connection in the new interface</a></li>
-          <li><a href="https://github.com/snapshot-labs/sx-monorepo/pull/2055">Guest login marked valid names as invalid</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fsx-monorepo+repo%3Asnapshot-labs%2Fsnapshot-v1&type=pullrequests">All 397</a></li>
-        </ul>
-      </details>
-
-      <details style="--w:0.275; --i:1">
-        <summary>
-          <span class="layer">Write path</span>
-          <span class="repos">sequencer, relayer</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">109</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/snapshot-sequencer/pull/21">Let an ENS controller act as the space controller</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot-sequencer/pull/84">Fall back to proposal strategies when validation has none</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot-sequencer/pull/85">Refresh scores every five minutes</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fsnapshot-sequencer+repo%3Asnapshot-labs%2Fsnapshot-relayer&type=pullrequests">All 109</a></li>
-        </ul>
-      </details>
-
-      <details style="--w:0.272; --i:2">
-        <summary>
-          <span class="layer">Voting power</span>
-          <span class="repos">strategies, score-api</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">108</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/snapshot-strategies/pull/1746">Delegated ApeCoin strategy</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot-strategies/pull/1726">ApeCoin staking strategy</a></li>
-          <li><a href="https://github.com/snapshot-labs/score-api/pull/822">Deduplicate concurrent score requests</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fsnapshot-strategies+repo%3Asnapshot-labs%2Fscore-api&type=pullrequests">All 108</a></li>
-        </ul>
-      </details>
-
-      <details style="--w:0.264; --i:3">
-        <summary>
-          <span class="layer">SDK</span>
-          <span class="repos">snapshot.js</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">105</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/snapshot.js/pull/363">Add Optimism network support</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot.js/pull/767">Route subgraph queries through subgrapher</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot.js/pull/1043">Raise the choices limit for Turbo spaces</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fsnapshot.js&type=pullrequests">All 105</a></li>
-        </ul>
-      </details>
-
-      <details style="--w:0.239; --i:4">
-        <summary>
-          <span class="layer">Read path</span>
-          <span class="repos">hub, subgraph, subgrapher</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">95</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/snapshot-hub/pull/576">Ranking query for the home page, with moderation and filtering</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot-hub/pull/537">Guidelines and templates on the space query</a></li>
-          <li><a href="https://github.com/snapshot-labs/snapshot-hub/pull/305">Emit events to snapshot-discord</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fsnapshot-hub+repo%3Asnapshot-labs%2Fsnapshot-subgraph+repo%3Asnapshot-labs%2Fsubgrapher&type=pullrequests">All 95</a></li>
-        </ul>
-      </details>
-
-      <details style="--w:0.166; --i:5">
-        <summary>
-          <span class="layer">Infra and billing</span>
-          <span class="repos">keycard, brovider, stamp, webhook</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">66</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/keycard/pull/46">New API key tiers</a></li>
-          <li><a href="https://github.com/snapshot-labs/keycard/pull/68">A tier for additional keys</a></li>
-          <li><a href="https://github.com/snapshot-labs/keycard/pull/38">Count requests without blocking on the write</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fkeycard+repo%3Asnapshot-labs%2Fbrovider+repo%3Asnapshot-labs%2Fstamp+repo%3Asnapshot-labs%2Fsnapshot-webhook&type=pullrequests">All 66</a></li>
-        </ul>
-      </details>
-
-      <details style="--w:0.048; --i:6">
-        <summary>
-          <span class="layer">Delegation</span>
-          <span class="repos">delegate-registry-api, delegates-api</span>
-          <span class="bar" aria-hidden="true"><i></i></span>
-          <span class="count">19</span>
-        </summary>
-        <ul class="prs">
-          <li><a href="https://github.com/snapshot-labs/delegate-registry-api/pull/38">Support whitelisted delegates</a></li>
-          <li><a href="https://github.com/snapshot-labs/delegates-api/pull/14">Index EVM networks with HyperSync</a></li>
-          <li><a href="https://github.com/snapshot-labs/delegate-registry-api/pull/29">Persist the current block between runs</a></li>
-          <li><a class="all" href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+repo%3Asnapshot-labs%2Fdelegate-registry-api+repo%3Asnapshot-labs%2Fdelegates-api&type=pullrequests">All 19</a></li>
-        </ul>
-      </details>
-
-      <div class="stack-total">
-        <span>Plus docs, keycard.js, laser, lock and a dozen smaller repos.</span>
-        <a href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests">All 1,000+ on GitHub</a>
-      </div>
-    </figure>
-
-    <div class="available">
-      <p>Taking contract work from October 2026.<small>Strategies, delegation and voting-power infra, migrations, integrations. Remote, IST.</small></p>
-      <a class="cta" href="https://t.me/chaituvr">Message on Telegram</a>
-    </div>
-
-    <section>
-      <h2>Recent work</h2>
-      <ul class="work">
-        <li><strong>Whitelisted delegation strategies for Grove DAO</strong><span>Custom voting-power rules that only count delegations from an allowlist, merged upstream into snapshot-strategies.</span></li>
-        <li><strong>Delegate indexing on Arbitrum for RAIN DAO</strong><span>A subgraph with chainId-indexed Governor mappings, feeding Snapshot's delegates API so L2 tokens get the same delegate views as mainnet.</span></li>
-        <li><strong>Ledger voting on Starknet</strong><span>Traced a failing signature to an empty EIP-712 domain in the Cairo EthSig path, then shipped an eth-tx fallback with automatic retry.</span></li>
-        <li><strong>Snapshot MCP server</strong><span>Query spaces and proposals, vote, and create proposals from Claude and other agents.</span></li>
-        <li><strong>Pull-request operations on autopilot</strong><span>Claude Code hooks, skills and scheduled routines that keep a 25-repo organisation rebased, reviewed and merged without a human babysitting it.</span></li>
-      </ul>
-    </section>
-
-    <section>
-      <h2>What I'm useful for</h2>
-      <p>Custom voting strategies. Delegation and voting-power infrastructure on mainnet, L2s and Starknet. Moving a DAO between Snapshot, onchain governance and hybrids. Integrations for delegates, foundations and aggregators that pull governance data. Agent and MCP integrations for governance tooling.</p>
-      <p>Vue, TypeScript, Node, GraphQL, subgraphs, Solidity and Cairo where the job needs them.</p>
-    </section>
-  </main>
-
-  <footer>
-    <p>Previously at Capgemini. Based in India.</p>
-    <p><a href="mailto:schaituvr@gmail.com">schaituvr@gmail.com</a></p>
-  </footer>
-</div>
+<section class="contact" id="contact">
+  <div class="orb" id="orb" aria-hidden="true"></div>
+  <h2>Taking contract work from October 2026. Remote, IST, fast replies.</h2>
+  <p class="big">Say hi.</p>
+  <div class="ways">
+    <a class="pill" href="https://t.me/chaituvr">Telegram</a>
+    <button class="pill" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
+    <a class="pill" href="https://x.com/chaituvr_s">X</a>
+    <a class="pill" href="https://linkedin.com/in/chaituvr">LinkedIn</a>
+    <a class="pill" href="https://github.com/ChaituVR">GitHub</a>
+  </div>
+  <p class="fine">Previously at Capgemini. Based in India.</p>
+</section>
 
 <script>
 (() => {
-  const KEY = 'chaitu-proposal-1';
-  const CHOICES = { 1: 'For', 2: 'Against', 3: 'Abstain' };
-  const vpEl = document.getElementById('vp');
-  const form = document.getElementById('ballot');
-  const cast = document.getElementById('cast');
-  const sheet = document.getElementById('sheet');
-  const typed = document.getElementById('typed-data');
-  const results = document.getElementById('results');
-  const receipt = document.getElementById('receipt');
-  const outcome = document.getElementById('outcome');
-  const state = document.getElementById('state');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  const start = Date.now();
-  let vp = 1;
-  const tick = setInterval(() => {
-    vp = 1 + Math.floor((Date.now() - start) / 1000);
-    vpEl.textContent = vp.toLocaleString();
-  }, 1000);
+  /* Tunnel */
+  const canvas = document.getElementById('tunnel');
+  const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
+  if (!gl || reduce) {
+    canvas.remove();
+    document.querySelector('.hero-fallback').hidden = false;
+  } else {
+    const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
+    const fs = `
+      precision highp float;
+      uniform vec2 u_res; uniform float u_time; uniform vec2 u_mouse;
+      void main() {
+        vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);
+        uv.x -= 0.18;
+        uv -= u_mouse * 0.12;
+        float r = length(uv);
+        float a = atan(uv.y, uv.x);
+        float t = u_time * 0.32;
+        float depth = 1.0 / (r + 0.06);
+        float twist = a * 3.0 + sin(a * 2.0 + t * 0.7) * 0.9;
+        float s1 = sin(depth * 1.5 - t * 2.2 + twist);
+        float s2 = sin(depth * 0.7 - t * 1.4 - a * 2.0 + 1.7);
+        float band = smoothstep(-0.12, 0.12, s1);
+        float band2 = smoothstep(-0.4, 0.4, s2);
+        float edge = 1.0 - smoothstep(0.0, 0.45, abs(s1));
+        vec3 blue = vec3(0.165, 0.17, 1.0);
+        vec3 coral = vec3(1.0, 0.42, 0.24);
+        vec3 peach = vec3(1.0, 0.83, 0.72);
+        vec3 pink = vec3(1.0, 0.45, 0.75);
+        vec3 col = mix(blue, coral, band);
+        col = mix(col, pink, band2 * 0.35 * (1.0 - band));
+        col = mix(col, peach, band * band2 * 0.35);
+        col *= 1.0 - edge * 0.22;
+        col = mix(col, peach, smoothstep(0.55, 0.0, r) * 0.7);
+        col += vec3(1.0) * smoothstep(0.1, 0.0, r);
+        col *= 1.0 - smoothstep(0.75, 1.6, r) * 0.35;
+        gl_FragColor = vec4(col, 1.0);
+      }`;
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
+    const prog = gl.createProgram();
+    gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs));
+    gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs));
+    gl.linkProgram(prog);
+    gl.useProgram(prog);
+    const buf = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, 3, -1, -1, 3]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'p');
+    gl.enableVertexAttribArray(loc);
+    gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    const uRes = gl.getUniformLocation(prog, 'u_res');
+    const uTime = gl.getUniformLocation(prog, 'u_time');
+    const uMouse = gl.getUniformLocation(prog, 'u_mouse');
 
-  const selected = () => form.querySelector('input[name="choice"]:checked');
-  form.addEventListener('change', () => { cast.disabled = !selected(); });
+    const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
+    addEventListener('pointermove', e => {
+      mouse.tx = (e.clientX / innerWidth - 0.5) * 2;
+      mouse.ty = -(e.clientY / innerHeight - 0.5) * 2;
+    }, { passive: true });
 
-  const hex = n => {
-    let h = 0x811c9dc5;
-    const s = String(n);
-    for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 0x01000193) >>> 0; }
-    return h.toString(16).padStart(8, '0');
-  };
+    const resize = () => {
+      const dpr = Math.min(devicePixelRatio || 1, 1.5);
+      canvas.width = Math.floor(canvas.clientWidth * dpr);
+      canvas.height = Math.floor(canvas.clientHeight * dpr);
+      gl.viewport(0, 0, canvas.width, canvas.height);
+    };
+    addEventListener('resize', resize, { passive: true });
+    resize();
 
-  const typedData = (choice) => ({
-    domain: { name: 'snapshot', version: '0.1.4' },
-    types: { Vote: [
-      { name: 'from', type: 'address' }, { name: 'space', type: 'string' },
-      { name: 'timestamp', type: 'uint64' }, { name: 'proposal', type: 'string' },
-      { name: 'choice', type: 'uint32' }, { name: 'reason', type: 'string' },
-      { name: 'app', type: 'string' }, { name: 'metadata', type: 'string' }
-    ] },
-    message: {
-      from: '0xYou',
-      space: 'chaitu.eth',
-      timestamp: Math.floor(Date.now() / 1000),
-      proposal: '0x' + hex('proposal-1').repeat(8),
-      choice: Number(choice),
-      reason: '',
-      app: 'chaituvr.github.io',
-      metadata: '{}'
+    let visible = true;
+    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
+    const start = performance.now();
+    const frame = (now) => {
+      if (visible && !document.hidden) {
+        mouse.x += (mouse.tx - mouse.x) * 0.05;
+        mouse.y += (mouse.ty - mouse.y) * 0.05;
+        gl.uniform2f(uRes, canvas.width, canvas.height);
+        gl.uniform1f(uTime, (now - start) / 1000);
+        gl.uniform2f(uMouse, mouse.x, mouse.y);
+        gl.drawArrays(gl.TRIANGLES, 0, 3);
+      }
+      requestAnimationFrame(frame);
+    };
+    requestAnimationFrame(frame);
+  }
+
+  /* Rolling role */
+  const roll = document.getElementById('roll');
+  const words = [...roll.children];
+  let idx = 0;
+  if (!reduce) {
+    setInterval(() => {
+      const cur = words[idx];
+      idx = (idx + 1) % words.length;
+      const next = words[idx];
+      cur.classList.remove('in'); cur.classList.add('out');
+      next.classList.remove('out'); next.classList.add('in');
+      setTimeout(() => cur.classList.remove('out'), 600);
+    }, 2400);
+  }
+
+  /* Reveal work lines */
+  const lines = document.querySelectorAll('#lines li');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
+  }, { threshold: 0.2 });
+  lines.forEach(li => io.observe(li));
+
+  /* Magnetic pills */
+  if (!reduce && matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('.pill').forEach(el => {
+      el.addEventListener('pointermove', e => {
+        const r = el.getBoundingClientRect();
+        const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
+        const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
+        el.style.transform = `translate(${dx * 10}px, ${dy * 10}px)`;
+      });
+      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    });
+  }
+
+  /* Orb follows the pointer inside contact */
+  const contact = document.getElementById('contact');
+  const orb = document.getElementById('orb');
+  if (!reduce) {
+    const pos = { x: 0, y: 0, tx: 0, ty: 0 };
+    contact.addEventListener('pointermove', e => {
+      const r = contact.getBoundingClientRect();
+      pos.tx = (e.clientX - r.left - r.width * 0.76) * 0.35;
+      pos.ty = (e.clientY - r.top - r.height * 0.5) * 0.35;
+    }, { passive: true });
+    const tick = () => {
+      pos.x += (pos.tx - pos.x) * 0.06;
+      pos.y += (pos.ty - pos.y) * 0.06;
+      orb.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))`;
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  /* Copy email */
+  const copy = document.getElementById('copy');
+  copy.addEventListener('click', async () => {
+    const email = copy.dataset.email;
+    try {
+      await navigator.clipboard.writeText(email);
+      copy.textContent = 'Copied';
+    } catch (e) {
+      location.href = 'mailto:' + email;
+      return;
     }
+    setTimeout(() => { copy.textContent = 'Copy email'; }, 1800);
   });
-
-  const render = (vote) => {
-    results.hidden = false;
-    for (const c of [1, 2, 3]) {
-      const pct = vote.choice === c ? 100 : 0;
-      results.querySelector(`[data-choice="${c}"]`).style.width = pct + '%';
-      results.querySelector(`[data-pct="${c}"]`).textContent = pct + '%';
-    }
-    const when = new Date(vote.ts * 1000);
-    receipt.textContent = `You voted ${CHOICES[vote.choice]} with ${vote.vp.toLocaleString()} voting power at ${when.toLocaleTimeString()}. Receipt 0x${hex(vote.ts)}${hex(vote.vp)}${hex(vote.choice)}. Tallied in your browser; this page has no backend.`;
-    outcome.innerHTML = {
-      1: '<p>Passed. Next step is execution.</p><a class="cta" href="https://t.me/chaituvr">Message on Telegram</a><a href="mailto:schaituvr@gmail.com">or email</a>',
-      2: '<p>Noted. If it helps, <a href="#stack">the work below</a> is what a yes would get you. The vote stays open.</p>',
-      3: '<p>Fair. Have a look around; the vote stays open and you can change it any time.</p>'
-    }[vote.choice];
-    state.textContent = 'Active, 1 vote';
-    cast.textContent = 'Change vote';
-    form.querySelector(`input[value="${vote.choice}"]`).checked = true;
-    cast.disabled = false;
-  };
-
-  cast.addEventListener('click', () => {
-    const choice = selected();
-    if (!choice) return;
-    const { domain, message } = typedData(choice.value);
-    typed.textContent = JSON.stringify({ domain, primaryType: 'Vote', message }, null, 2);
-    sheet.showModal();
-  });
-  document.getElementById('cancel').addEventListener('click', () => sheet.close());
-  document.getElementById('sign').addEventListener('click', () => {
-    const choice = Number(selected().value);
-    const vote = { choice, vp, ts: Math.floor(Date.now() / 1000) };
-    try { localStorage.setItem(KEY, JSON.stringify(vote)); } catch (e) {}
-    sheet.close();
-    render(vote);
-  });
-
-  try {
-    const saved = JSON.parse(localStorage.getItem(KEY));
-    if (saved && CHOICES[saved.choice]) render(saved);
-  } catch (e) {}
 })();
 </script>
 </body>
