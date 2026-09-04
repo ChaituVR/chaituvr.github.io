@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chaitu — governance infrastructure engineer</title>
-<meta name="description" content="Chaitu builds governance infrastructure. Snapshot core team since 2020. Voting strategies, delegation, agents. Open for contract work.">
+<meta name="description" content="Chaitu builds governance infrastructure. Snapshot core team since 2020. Voting strategies, delegation, agents.">
 <meta property="og:title" content="Chaitu — governance infrastructure engineer">
-<meta property="og:description" content="Snapshot core team since 2020. Voting strategies, delegation, agents. Open for contract work.">
+<meta property="og:description" content="Snapshot core team since 2020. Voting strategies, delegation, agents.">
 <meta property="og:url" content="https://chaituvr.github.io/">
 <meta name="theme-color" content="#2A2BFF">
 <link rel="icon" href="/images/favicons/favicon-96x96.png" type="image/png">
@@ -24,6 +24,7 @@
     --white: #FFFFFF;
     --pad: clamp(1.25rem, 4vw, 3.5rem);
     --ease: cubic-bezier(.2,.9,.2,1);
+    --spring: cubic-bezier(.34,1.5,.64,1);
   }
   * { box-sizing: border-box; }
   html, body { height: 100%; }
@@ -61,7 +62,7 @@
   .views { position: relative; pointer-events: none; }
   .view {
     position: absolute; inset: auto var(--pad) clamp(1rem, 4vh, 2.5rem) var(--pad);
-    display: grid; gap: 1rem; max-width: 68rem;
+    display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; max-width: 68rem;
     visibility: hidden;
   }
   .view.on { visibility: visible; }
@@ -80,12 +81,16 @@
   .kinetic span {
     display: inline-block; opacity: 0; transform: translateY(0.25em);
     font-variation-settings: "opsz" 96, "wdth" 75, "wght" 200;
-    animation: letter 1s var(--ease) forwards; animation-delay: calc(var(--i) * 45ms + 80ms);
-    transition: font-variation-settings 0.45s var(--ease);
+    animation: letter 1s var(--ease) forwards, breathe 2.4s ease-in-out infinite alternate;
+    animation-delay: calc(var(--i) * 45ms + 80ms), calc(var(--i) * 120ms + 1.1s);
+    transition: color 0.3s;
   }
-  .kinetic:hover span { font-variation-settings: "opsz" 96, "wdth" 85, "wght" 500; }
-  .kinetic:hover span:hover { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
+  .kinetic span:hover { color: var(--yellow); animation-play-state: paused; }
   @keyframes letter { to { opacity: 1; transform: none; font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; } }
+  @keyframes breathe {
+    from { opacity: 1; transform: none; font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
+    to { opacity: 1; transform: translateY(-0.05em); font-variation-settings: "opsz" 96, "wdth" 90, "wght" 560; }
+  }
   .name { font-size: clamp(4.5rem, 17vw, 14rem); }
   .head { font-size: clamp(2.4rem, 7.5vw, 6rem); }
   .lead {
@@ -106,17 +111,64 @@
   .pill:hover { background: rgba(255,255,255,0.3); }
   .pill[aria-pressed="true"] { background: var(--white); color: var(--navy); border-color: var(--white); }
   .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .view.on .chips .pill, .view.on .ways .pill {
+    animation: pop 0.7s var(--spring) backwards; animation-delay: calc(var(--i, 0) * 60ms + 250ms);
+  }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .tag {
     padding: 0.25rem 0.65rem; border-radius: 999px; font-size: 0.85rem; white-space: nowrap;
     border: 1px solid rgba(255,255,255,0.4); background: rgba(14,15,92,0.35);
     font-variation-settings: "opsz" 24, "wdth" 92, "wght" 550;
-    animation: rise 0.7s var(--ease) both; animation-delay: calc(var(--i) * 50ms + 150ms);
+    animation: pop 0.6s var(--spring) backwards; animation-delay: calc(var(--i) * 50ms + 150ms);
   }
+  @keyframes pop { from { opacity: 0; transform: scale(0.6); } }
+  .marquee {
+    width: 100vw; margin-left: calc(-1 * var(--pad)); overflow: hidden; display: flex;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+  }
+  .marquee .track { display: flex; gap: 0.4rem; padding-right: 0.4rem; flex: none; animation: slide 26s linear infinite; }
+  .marquee:hover .track { animation-play-state: paused; }
+  .marquee .tag { animation: none; }
+  @keyframes slide { to { transform: translateX(-100%); } }
   .pill.done { background: var(--yellow); color: var(--navy); border-color: var(--yellow); }
   .ways { display: flex; flex-wrap: wrap; gap: 0.6rem; }
   .ways .pill { font-size: clamp(1rem, 1.5vw, 1.25rem); padding: 0.8rem 1.3rem; }
   .ways .pill:hover { background: var(--white); color: var(--navy); }
+
+  .wipe {
+    position: fixed; inset: -10% -30%; z-index: 5; pointer-events: none; opacity: 0;
+    background: linear-gradient(100deg, transparent 32%, var(--peach) 44%, var(--yellow) 50%, var(--coral) 56%, transparent 68%);
+  }
+  .wipe.go { animation: wipe 0.7s cubic-bezier(.7,0,.2,1) both; }
+  @keyframes wipe {
+    from { opacity: 1; transform: translateX(-100%) skewX(-12deg); }
+    to { opacity: 1; transform: translateX(100%) skewX(-12deg); }
+  }
+
+  .hi-card {
+    position: fixed; z-index: 6; left: 50%; top: 40%; width: min(24rem, 78vw); cursor: pointer;
+    translate: -50% -50%; rotate: -4deg; border-radius: 1.25rem; overflow: hidden;
+    border: 4px solid var(--white); background: var(--navy);
+    box-shadow: 0 30px 80px rgba(14,15,92,0.55);
+  }
+  .hi-card img { display: block; width: 100%; height: auto; }
+  .hi-card.in { animation: cardIn 0.7s var(--spring) both; }
+  .hi-card.out { animation: cardOut 0.3s var(--ease) both; }
+  @keyframes cardIn { from { opacity: 0; scale: 0.4; rotate: 12deg; } to { opacity: 1; scale: 1; rotate: -4deg; } }
+  @keyframes cardOut { to { opacity: 0; scale: 0.7; rotate: 6deg; } }
+  .burst { position: fixed; inset: 0; z-index: 7; pointer-events: none; overflow: hidden; }
+  .burst span {
+    position: absolute; left: 0; top: 0; line-height: 1; white-space: nowrap;
+    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
+    animation: fly 1.4s cubic-bezier(.15,.8,.3,1) forwards;
+  }
+  @keyframes fly {
+    from { opacity: 1; transform: translate(var(--x), var(--y)) scale(0.2) rotate(0deg); }
+    60% { opacity: 1; }
+    to { opacity: 0; transform: translate(calc(var(--x) + var(--dx)), calc(var(--y) + var(--dy))) scale(1) rotate(var(--rot)); }
+  }
+  @media (min-width: 60rem) { .hi-card { left: 64%; top: 44%; } }
 
   .dock { display: flex; justify-content: center; padding: 0 var(--pad) clamp(1rem, 3vh, 1.75rem); }
   .seg {
@@ -129,7 +181,7 @@
     content: ""; position: absolute; top: 0.3rem; bottom: 0.3rem; left: 0.3rem;
     width: calc((100% - 0.6rem) / 3); border-radius: 999px; background: var(--white);
     transform: translateX(calc(var(--sel, 0) * 100%));
-    transition: transform 0.5s var(--ease);
+    transition: transform 0.55s var(--spring);
   }
   .seg button {
     position: relative; padding: 0.7rem 1.4rem; border-radius: 999px; white-space: nowrap;
@@ -139,9 +191,13 @@
   .seg kbd { font: inherit; font-size: 0.75em; opacity: 0.55; margin-left: 0.45rem; }
 
   @media (prefers-reduced-motion: reduce) {
-    .view.on > *, .view.off > *, .kinetic span, .tag { animation: none; opacity: 1; transform: none; }
+    .view.on > *, .view.off > *, .kinetic span, .tag, .view.on .pill, .wipe.go, .hi-card, .burst span,
+    .marquee .track { animation: none; opacity: 1; transform: none; }
     .kinetic span { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; transition: none; }
     .seg::before, .pill { transition: none; }
+    .wipe { display: none; }
+    .marquee .track { flex-wrap: wrap; }
+    .marquee .track + .track { display: none; }
   }
   @media (max-width: 40rem) {
     .since { display: none; }
@@ -167,9 +223,7 @@
     <section class="view on" id="view-name" aria-labelledby="name-h">
       <h1 class="kinetic name" id="name-h" style="--i:0" data-text="Chaitu"></h1>
       <p class="lead" style="--i:1">Builds governance infrastructure. Voting, delegation and the agents that will use both.</p>
-      <div class="tags" style="--i:2" aria-label="Stack">
-        <span class="tag" style="--i:0">TypeScript</span><span class="tag" style="--i:1">Node.js</span><span class="tag" style="--i:2">Vue</span><span class="tag" style="--i:3">GraphQL</span><span class="tag" style="--i:4">Solidity</span><span class="tag" style="--i:5">Ethereum</span><span class="tag" style="--i:6">Starknet</span><span class="tag" style="--i:7">The Graph</span>
-      </div>
+      <div class="marquee" id="stack" style="--i:2" aria-label="Stack"></div>
       <p class="hint" style="--i:3">Click the tunnel. Hold it. Then hit the buttons below.</p>
     </section>
 
@@ -183,16 +237,19 @@
 
     <section class="view" id="view-hi" aria-labelledby="hi-h" hidden>
       <h2 class="kinetic head" id="hi-h" style="--i:0" data-text="Say hi."></h2>
-      <p class="lead" style="--i:1">Taking contract work from October 2026. Remote, IST, fast replies.</p>
-      <div class="ways" style="--i:2">
-        <a class="pill" href="https://t.me/chaituvr">Telegram</a>
-        <button class="pill" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
-        <a class="pill" href="https://x.com/chaituvr_s">X</a>
-        <a class="pill" href="https://linkedin.com/in/chaituvr">LinkedIn</a>
-        <a class="pill" href="https://github.com/ChaituVR">GitHub</a>
+      <p class="lead" style="--i:1">Remote, IST, fast replies. DMs open.</p>
+      <div class="ways" id="ways" style="--i:2">
+        <a class="pill" style="--i:0" href="https://t.me/chaituvr" target="_blank" rel="noopener">Telegram</a>
+        <button class="pill" style="--i:1" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
+        <a class="pill" style="--i:2" href="https://x.com/chaituvr_s" target="_blank" rel="noopener">X</a>
+        <a class="pill" style="--i:3" href="https://linkedin.com/in/chaituvr" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="pill" style="--i:4" href="https://github.com/ChaituVR" target="_blank" rel="noopener">GitHub</a>
       </div>
     </section>
   </div>
+
+  <div class="wipe" id="wipe" aria-hidden="true"></div>
+  <div class="burst" id="burst" aria-hidden="true"></div>
 
   <nav class="dock" aria-label="Sections">
     <div class="seg" role="tablist" id="seg" style="--sel:0">
@@ -227,6 +284,21 @@
   };
   document.querySelectorAll('.kinetic[data-text]').forEach(el => { if (el.dataset.text) setText(el, el.dataset.text); });
 
+  /* Stack marquee: two identical tracks for a seamless loop */
+  const stack = ['TypeScript', 'Node.js', 'Vue', 'GraphQL', 'Solidity', 'Ethereum', 'Starknet', 'The Graph', 'ethers.js', 'MySQL', 'MCP', 'EIP-712'];
+  $('#stack').replaceChildren(...[0, 1].map(() => {
+    const track = document.createElement('div');
+    track.className = 'track';
+    track.replaceChildren(...stack.map(name => {
+      const s = document.createElement('span');
+      s.className = 'tag'; s.textContent = name;
+      return s;
+    }));
+    return track;
+  }));
+
+  const replay = (el) => { el.style.animation = 'none'; void el.offsetWidth; el.style.animation = ''; };
+
   /* Tunnel */
   const scenes = {
     name: { a: [0.165, 0.17, 1.0], b: [1.0, 0.42, 0.24], twist: 3, speed: 1.0 },
@@ -252,6 +324,7 @@
       precision highp float;
       uniform vec2 u_res; uniform float u_time; uniform vec2 u_mouse;
       uniform vec3 u_a; uniform vec3 u_b; uniform vec3 u_twist; uniform vec3 u_click;
+      float hash(float n) { return fract(sin(n) * 43758.5453); }
       void main() {
         vec2 uv0 = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);
         vec2 uv = uv0; uv.x -= 0.18; uv -= u_mouse * 0.12;
@@ -277,7 +350,16 @@
         float d = length(uv0 - u_click.xy);
         float ring = smoothstep(0.05, 0.0, abs(d - age * 1.1)) * max(0.0, 1.0 - age * 0.9);
         col += vec3(1.0, 0.95, 0.85) * ring * 0.9;
+        float lanes = 24.0;
+        float ang = (a + 3.14159) / 6.28318 * lanes;
+        float h = hash(floor(ang) * 7.13);
+        float la = fract(ang) - 0.5;
+        float z = fract(depth * 0.16 + t * (0.5 + h * 0.6) + h);
+        float streak = smoothstep(0.1, 0.0, abs(la)) * smoothstep(0.14, 0.0, abs(z - 0.5));
+        streak *= step(0.4, h) * smoothstep(0.1, 0.4, r) * (1.0 - smoothstep(0.9, 1.5, r));
+        col += vec3(1.0, 0.97, 0.9) * streak * 0.6;
         col *= 1.0 - smoothstep(0.75, 1.6, r) * 0.35;
+        col += (hash(dot(gl_FragCoord.xy, vec2(12.9898, 78.233)) + fract(t)) - 0.5) * 0.05;
         gl_FragColor = vec4(col, 1.0);
       }`;
     const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); return s; };
@@ -372,8 +454,10 @@
     if (w.link) {
       const a = document.createElement('a');
       a.href = w.link[1]; a.textContent = w.link[0];
+      a.target = '_blank'; a.rel = 'noopener';
       workD.append(a, '.');
     }
+    replay(workD);
     workT.replaceChildren(...w.tech.map((name, j) => {
       const s = document.createElement('span');
       s.className = 'tag'; s.textContent = name; s.style.setProperty('--i', j);
@@ -385,6 +469,7 @@
   work.forEach((w, i) => {
     const b = document.createElement('button');
     b.type = 'button'; b.className = 'pill'; b.textContent = w.t;
+    b.style.setProperty('--i', i);
     b.setAttribute('aria-pressed', 'false');
     b.addEventListener('click', () => showWork(i));
     chips.append(b);
@@ -395,6 +480,7 @@
   const views = { name: $('#view-name'), work: $('#view-work'), hi: $('#view-hi') };
   const order = ['name', 'work', 'hi'];
   const seg = $('#seg');
+  const wipe = $('#wipe');
   let active = 'name';
   let swapTimer = 0;
   const show = (key) => {
@@ -404,6 +490,9 @@
     target = scenes[key];
     if (tw.to !== target.twist) { tw.from = tw.to; tw.to = target.twist; tw.mix = 0; }
     kick = 1.5;
+    if (!reduce) { wipe.classList.remove('go'); void wipe.offsetWidth; wipe.classList.add('go'); }
+    hideCard();
+    if (key === 'hi') preloadHi();
     seg.style.setProperty('--sel', order.indexOf(key));
     seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === key)));
     from.classList.remove('on'); from.classList.add('off');
@@ -441,6 +530,63 @@
     });
   }
 
+  /* Say hi: a wave gif plus a burst of greetings on every button in the view */
+  const gifs = ['ASd0Ukj0y3qMM', 'xTiIzJSKB4l7xTouE8', 'xT9IgG50Fb7Mi0prBC'];
+  const gifUrl = (id, ext) => `https://media.giphy.com/media/${id}/giphy.${ext}`;
+  const words = ['hi', 'hello', 'hey', 'namaste', 'yo', 'hola', 'hi!', 'sup', 'ciao', '👋'];
+  const tints = ['#FFFFFF', '#F7EC4F', '#FFD3B8'];
+  const burst = $('#burst');
+  let preloaded = false;
+  const preloadHi = () => {
+    if (preloaded) return;
+    preloaded = true;
+    gifs.forEach(id => { new Image().src = gifUrl(id, 'webp'); });
+  };
+  let card = null, cardTimer = 0, gifIdx = Math.floor(Math.random() * gifs.length);
+  const hideCard = () => {
+    if (!card) return;
+    const el = card;
+    card = null;
+    clearTimeout(cardTimer);
+    if (reduce) { el.remove(); return; }
+    el.classList.replace('in', 'out');
+    el.addEventListener('animationend', () => el.remove(), { once: true });
+  };
+  const showCard = () => {
+    hideCard();
+    const id = gifs[gifIdx++ % gifs.length];
+    card = document.createElement('div');
+    card.className = 'hi-card in';
+    card.innerHTML = `<picture><source type="image/webp" srcset="${gifUrl(id, 'webp')}"><img src="${gifUrl(id, 'gif')}" alt="Hi!" width="480" height="270"></picture>`;
+    card.addEventListener('click', hideCard);
+    document.body.append(card);
+    cardTimer = setTimeout(hideCard, 3200);
+  };
+  const burstAt = (x, y) => {
+    if (reduce) return;
+    for (let i = 0; i < 12; i++) {
+      const s = document.createElement('span');
+      const ang = Math.random() * Math.PI * 2, dist = 120 + Math.random() * 220;
+      s.textContent = words[Math.floor(Math.random() * words.length)];
+      s.style.color = tints[i % tints.length];
+      s.style.fontSize = (1.2 + Math.random() * 2) + 'rem';
+      s.style.setProperty('--x', x + 'px'); s.style.setProperty('--y', y + 'px');
+      s.style.setProperty('--dx', Math.cos(ang) * dist + 'px'); s.style.setProperty('--dy', (Math.sin(ang) * dist - 120) + 'px');
+      s.style.setProperty('--rot', (Math.random() * 60 - 30) + 'deg');
+      s.addEventListener('animationend', () => s.remove(), { once: true });
+      burst.append(s);
+    }
+  };
+  $('#ways').addEventListener('click', e => {
+    const el = e.target.closest('.pill');
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    burstAt(r.left + r.width / 2, r.top + r.height / 2);
+    showCard();
+    kick = 2;
+  });
+  addEventListener('keydown', e => { if (e.key === 'Escape') hideCard(); });
+
   /* Copy email */
   const copy = $('#copy');
   let copyTimer = 0;
@@ -454,7 +600,6 @@
     }
     copy.textContent = 'Copied!';
     copy.classList.add('done');
-    kick = 2;
     clearTimeout(copyTimer);
     copyTimer = setTimeout(() => { copy.textContent = 'Copy email'; copy.classList.remove('done'); }, 2000);
   });
