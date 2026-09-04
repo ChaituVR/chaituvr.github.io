@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Chaitu — governance infrastructure engineer</title>
 <meta name="description" content="Chaitu builds governance infrastructure. Snapshot core team since 2020. Voting strategies, delegation, agents. Open for contract work.">
 <meta property="og:title" content="Chaitu — governance infrastructure engineer">
@@ -19,266 +19,261 @@
     --blue: #2A2BFF;
     --coral: #FF6A3D;
     --peach: #FFD3B8;
-    --cream: #FFF3EA;
     --yellow: #F7EC4F;
     --navy: #0E0F5C;
     --white: #FFFFFF;
+    --pad: clamp(1.25rem, 4vw, 3.5rem);
+    --ease: cubic-bezier(.2,.9,.2,1);
   }
   * { box-sizing: border-box; }
-  html { background: var(--blue); color: var(--white); scroll-behavior: smooth; }
+  html, body { height: 100%; }
+  html { background: var(--blue); color: var(--white); }
   body {
-    margin: 0;
+    margin: 0; overflow: hidden;
     font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, system-ui, sans-serif;
     font-variation-settings: "opsz" 24, "wdth" 100, "wght" 400;
-    font-size: clamp(1rem, 1.1vw + 0.6rem, 1.25rem);
+    font-size: clamp(1rem, 1.1vw + 0.6rem, 1.2rem);
     line-height: 1.4;
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
+    user-select: none; -webkit-user-select: none;
   }
   a { color: inherit; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   a:focus-visible, button:focus-visible { outline: 3px solid var(--yellow); outline-offset: 4px; border-radius: 999px; }
-  button { font: inherit; color: inherit; }
 
-  /* Hero */
-  .hero { position: relative; min-height: 100svh; display: grid; grid-template-rows: auto 1fr auto; isolation: isolate; }
-  #tunnel { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; }
-  .hero-fallback {
+  .stage { position: relative; height: 100svh; isolation: isolate; display: grid; grid-template-rows: auto 1fr auto; }
+  #tunnel { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -2; display: block; touch-action: none; cursor: grab; }
+  #tunnel:active { cursor: grabbing; }
+  .fallback {
     position: absolute; inset: 0; z-index: -2;
-    background: radial-gradient(circle at 60% 45%, var(--white) 0, var(--peach) 8%, var(--coral) 30%, var(--blue) 65%);
+    background: radial-gradient(circle at 62% 45%, var(--white) 0, var(--peach) 8%, var(--coral) 30%, var(--blue) 65%);
   }
-  .hero::after {
+  .stage::after {
     content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
-    background: linear-gradient(to top, rgba(14, 15, 92, 0.75) 0%, rgba(14, 15, 92, 0.25) 35%, transparent 60%);
+    background: linear-gradient(to top, rgba(14, 15, 92, 0.8) 0%, rgba(14, 15, 92, 0.3) 40%, transparent 65%);
   }
-  .top {
-    display: flex; justify-content: space-between; align-items: center; gap: 1rem;
-    padding: 1.5rem clamp(1.25rem, 4vw, 3.5rem);
-  }
+
+  .top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 1.4rem var(--pad) 0; pointer-events: none; }
+  .top > * { pointer-events: auto; }
   .mark { font-variation-settings: "opsz" 24, "wdth" 90, "wght" 700; text-decoration: none; letter-spacing: -0.01em; }
-  .top nav { display: flex; gap: 0.5rem; }
+  .since { font-size: 0.9rem; opacity: 0.85; font-variation-settings: "opsz" 24, "wdth" 90, "wght" 500; }
+
+  .views { position: relative; pointer-events: none; }
+  .view {
+    position: absolute; inset: auto var(--pad) clamp(1rem, 4vh, 2.5rem) var(--pad);
+    display: grid; gap: 1rem; max-width: 68rem;
+    visibility: hidden;
+  }
+  .view.on { visibility: visible; }
+  .view > * { pointer-events: auto; }
+  .view.on > * { animation: rise 0.9s var(--ease) both; animation-delay: calc(var(--i, 0) * 90ms); }
+  .view.off > * { animation: sink 0.35s var(--ease) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(1.2rem); } to { opacity: 1; transform: none; } }
+  @keyframes sink { to { opacity: 0; transform: translateY(-0.8rem); } }
+
+  .kinetic {
+    margin: 0; line-height: 0.88; letter-spacing: -0.045em;
+    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
+    display: flex; flex-wrap: wrap; column-gap: 0.22em;
+  }
+  .kinetic i { display: inline-flex; font-style: normal; }
+  .kinetic span {
+    display: inline-block; opacity: 0; transform: translateY(0.25em);
+    font-variation-settings: "opsz" 96, "wdth" 75, "wght" 200;
+    animation: letter 1s var(--ease) forwards; animation-delay: calc(var(--i) * 45ms + 80ms);
+    transition: font-variation-settings 0.45s var(--ease);
+  }
+  .kinetic:hover span { font-variation-settings: "opsz" 96, "wdth" 85, "wght" 500; }
+  .kinetic:hover span:hover { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
+  @keyframes letter { to { opacity: 1; transform: none; font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; } }
+  .name { font-size: clamp(4.5rem, 17vw, 14rem); }
+  .head { font-size: clamp(2.4rem, 7.5vw, 6rem); }
+  .lead {
+    margin: 0; max-width: 36rem;
+    font-size: clamp(1.15rem, 2.2vw, 1.7rem); line-height: 1.25; letter-spacing: -0.015em;
+    font-variation-settings: "opsz" 48, "wdth" 95, "wght" 500;
+  }
+  .lead a { text-decoration-thickness: 2px; text-underline-offset: 0.15em; color: var(--yellow); }
+  .hint { margin: 0; font-size: 0.95rem; opacity: 0.8; font-variation-settings: "opsz" 24, "wdth" 92, "wght" 500; }
+
   .pill {
     display: inline-flex; align-items: center; gap: 0.5rem;
-    padding: 0.55rem 1rem; border-radius: 999px; text-decoration: none;
-    background: rgba(255,255,255,0.14); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.28); font-variation-settings: "opsz" 24, "wdth" 95, "wght" 500;
-    transition: background 0.25s, transform 0.25s cubic-bezier(.2,.8,.2,1);
-    will-change: transform;
+    padding: 0.6rem 1.05rem; border-radius: 999px; text-decoration: none; white-space: nowrap;
+    background: rgba(255,255,255,0.14); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border: 1.5px solid rgba(255,255,255,0.3); font-variation-settings: "opsz" 24, "wdth" 95, "wght" 550;
+    transition: background 0.25s, color 0.25s, transform 0.3s var(--ease); will-change: transform;
   }
-  .pill:hover { background: rgba(255,255,255,0.28); }
-  .pill.solid { background: var(--white); color: var(--navy); border-color: var(--white); }
-  .pill.solid:hover { background: var(--yellow); border-color: var(--yellow); }
-
-  .title { align-self: end; padding: 0 clamp(1.25rem, 4vw, 3.5rem) clamp(2rem, 6vh, 4rem); }
-  .name {
-    margin: 0; line-height: 0.86; letter-spacing: -0.045em;
-    font-size: clamp(4.5rem, 18vw, 15rem);
-    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
-    display: flex; flex-wrap: wrap;
-  }
-  .name span {
-    display: inline-block;
-    font-variation-settings: "opsz" 96, "wdth" 75, "wght" 200;
-    opacity: 0; transform: translateY(0.25em);
-    animation: letter 1.1s cubic-bezier(.2,.9,.2,1) forwards;
-    animation-delay: calc(var(--i) * 70ms + 200ms);
-    transition: font-variation-settings 0.5s cubic-bezier(.2,.8,.2,1);
-  }
-  .name:hover span { font-variation-settings: "opsz" 96, "wdth" 85, "wght" 500; }
-  .name:hover span:hover { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
-  @keyframes letter {
-    to { opacity: 1; transform: translateY(0); font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
-  }
-  .role {
-    margin: 1.25rem 0 0; max-width: 44rem;
-    font-size: clamp(1.35rem, 3.2vw, 2.5rem); line-height: 1.12; letter-spacing: -0.02em;
-    font-variation-settings: "opsz" 48, "wdth" 95, "wght" 500;
-    opacity: 0; animation: rise 1s cubic-bezier(.2,.9,.2,1) 0.9s forwards;
-  }
-  @keyframes rise { from { opacity: 0; transform: translateY(0.6rem); } to { opacity: 1; transform: none; } }
-  .roll {
-    display: inline-grid; vertical-align: bottom; overflow: hidden; height: 1.12em;
-    color: var(--yellow);
-  }
-  .roll > b {
-    grid-area: 1 / 1; font-weight: inherit; white-space: nowrap;
-    transform: translateY(110%); opacity: 0;
-    transition: transform 0.55s cubic-bezier(.2,.9,.2,1), opacity 0.3s;
-  }
-  .roll > b.in { transform: translateY(0); opacity: 1; }
-  .roll > b.out { transform: translateY(-110%); opacity: 0; }
-
-  .scroll-hint {
-    padding: 0 clamp(1.25rem, 4vw, 3.5rem) 1.5rem; display: flex; justify-content: space-between; align-items: end;
-    font-size: 0.9rem; opacity: 0.85;
-    font-variation-settings: "opsz" 24, "wdth" 90, "wght" 500;
-  }
-  .scroll-hint .bob { display: inline-block; animation: bob 1.8s ease-in-out infinite; }
-  @keyframes bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(0.35rem); } }
-
-  /* Work */
-  .work { background: var(--cream); color: var(--navy); padding: clamp(4rem, 12vh, 8rem) clamp(1.25rem, 4vw, 3.5rem); }
-  .work h2, .contact h2 {
-    margin: 0 0 clamp(1.5rem, 4vh, 3rem);
-    font-size: clamp(1.1rem, 1.8vw, 1.4rem); line-height: 1.3;
-    font-variation-settings: "opsz" 24, "wdth" 95, "wght" 500; max-width: 40rem;
-  }
-  .lines { list-style: none; margin: 0; padding: 0; }
-  .lines li {
-    border-top: 2px solid var(--navy);
-    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 24rem); gap: 1rem 2rem; align-items: start;
-    padding: clamp(1rem, 2.5vh, 1.6rem) 0;
-    opacity: 0; transform: translateY(1.5rem);
-    transition: opacity 0.8s cubic-bezier(.2,.9,.2,1), transform 0.8s cubic-bezier(.2,.9,.2,1);
-    transition-delay: calc(var(--i) * 90ms);
-  }
-  .lines li:last-child { border-bottom: 2px solid var(--navy); }
-  .lines li.show { opacity: 1; transform: none; }
-  .lines strong {
-    display: block; font-size: clamp(1.8rem, 5vw, 4.25rem); line-height: 1; letter-spacing: -0.035em;
-    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 700;
-    background: linear-gradient(90deg, var(--navy), var(--navy)) no-repeat 0 100% / 0% 0.08em;
-    transition: font-variation-settings 0.5s cubic-bezier(.2,.8,.2,1);
-  }
-  .lines li:hover strong { font-variation-settings: "opsz" 96, "wdth" 82, "wght" 800; color: var(--blue); }
-  .lines span { font-size: clamp(0.95rem, 1.3vw, 1.15rem); max-width: 22rem; line-height: 1.35; }
-  .lines span a { color: var(--blue); text-decoration-thickness: 2px; text-underline-offset: 0.15em; }
-  .work .foot { margin: 2rem 0 0; font-variation-settings: "opsz" 24, "wdth" 95, "wght" 500; }
-  .work .foot a { color: var(--blue); }
-
-  /* Contact */
-  .contact {
-    position: relative; overflow: hidden; isolation: isolate;
-    background: var(--navy); color: var(--white);
-    min-height: 100svh; display: grid; align-content: center;
-    padding: clamp(4rem, 12vh, 8rem) clamp(1.25rem, 4vw, 3.5rem);
-  }
-  .orb {
-    position: absolute; z-index: -1; width: min(70vw, 34rem); aspect-ratio: 1; border-radius: 50%;
-    left: 76%; top: 50%; transform: translate(-50%, -50%);
-    background: radial-gradient(circle at 35% 30%, var(--white) 0, var(--peach) 14%, var(--coral) 45%, var(--blue) 75%, transparent 76%);
-    filter: blur(0.5px); will-change: transform;
-  }
-  .contact h2 { color: var(--white); max-width: 30rem; }
-  .big {
-    margin: 0 0 2rem; letter-spacing: -0.04em; line-height: 0.9;
-    font-size: clamp(3rem, 12vw, 10rem);
-    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
-  }
-  .ways { display: flex; flex-wrap: wrap; gap: 0.75rem; }
-  .ways .pill { font-size: clamp(1rem, 1.6vw, 1.35rem); padding: 0.85rem 1.4rem; border-width: 2px; }
+  .pill:hover { background: rgba(255,255,255,0.3); }
+  .pill[aria-pressed="true"] { background: var(--white); color: var(--navy); border-color: var(--white); }
+  .chips { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .ways { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .ways .pill { font-size: clamp(1rem, 1.5vw, 1.25rem); padding: 0.8rem 1.3rem; }
   .ways .pill:hover { background: var(--white); color: var(--navy); }
-  .ways button.pill { cursor: pointer; }
-  .fine { margin: 2.5rem 0 0; opacity: 0.8; font-size: 0.95rem; }
+
+  .dock { display: flex; justify-content: center; padding: 0 var(--pad) clamp(1rem, 3vh, 1.75rem); }
+  .seg {
+    position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: 1fr;
+    padding: 0.3rem; border-radius: 999px;
+    background: rgba(14,15,92,0.5); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+    border: 1.5px solid rgba(255,255,255,0.25);
+  }
+  .seg::before {
+    content: ""; position: absolute; top: 0.3rem; bottom: 0.3rem; left: 0.3rem;
+    width: calc((100% - 0.6rem) / 3); border-radius: 999px; background: var(--white);
+    transform: translateX(calc(var(--sel, 0) * 100%));
+    transition: transform 0.5s var(--ease);
+  }
+  .seg button {
+    position: relative; padding: 0.7rem 1.4rem; border-radius: 999px; white-space: nowrap;
+    font-variation-settings: "opsz" 24, "wdth" 92, "wght" 600; transition: color 0.3s;
+  }
+  .seg button[aria-selected="true"] { color: var(--navy); }
+  .seg kbd { font: inherit; font-size: 0.75em; opacity: 0.55; margin-left: 0.45rem; }
+
+  .toast {
+    position: absolute; left: 50%; bottom: clamp(5rem, 12vh, 7rem); transform: translate(-50%, 1rem);
+    padding: 0.6rem 1rem; border-radius: 999px; background: var(--yellow); color: var(--navy);
+    font-variation-settings: "opsz" 24, "wdth" 95, "wght" 600; opacity: 0; pointer-events: none;
+    transition: opacity 0.3s, transform 0.4s var(--ease);
+  }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
 
   @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto; }
-    .name span, .role { animation: none; opacity: 1; transform: none; font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; }
-    .role { font-variation-settings: "opsz" 48, "wdth" 95, "wght" 500; }
-    .lines li { opacity: 1; transform: none; transition: none; }
-    .scroll-hint .bob { animation: none; }
-    .roll > b { transition: none; }
-    .pill { transition: none; }
+    .view.on > *, .view.off > *, .kinetic span { animation: none; opacity: 1; transform: none; }
+    .kinetic span { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; transition: none; }
+    .seg::before, .pill, .toast { transition: none; }
   }
   @media (max-width: 40rem) {
-    .top nav .pill:not(.solid) { display: none; }
-    .lines li { grid-template-columns: 1fr; gap: 0.5rem; }
-    .orb { width: 60vw; left: 84%; top: 12%; }
+    .since { display: none; }
+    .seg kbd { display: none; }
+    .seg button { padding: 0.65rem 0.9rem; }
+    .view { gap: 0.8rem; }
   }
+  @media (max-height: 30rem) { .name { font-size: clamp(3rem, 12vh, 6rem); } .hint { display: none; } }
 </style>
 </head>
 <body>
 
-<section class="hero">
-  <canvas id="tunnel" aria-hidden="true"></canvas>
-  <div class="hero-fallback" aria-hidden="true" hidden></div>
+<main class="stage" id="stage">
+  <canvas id="tunnel" aria-label="Animated gradient tunnel. Click for a ripple, hold to speed up."></canvas>
+  <div class="fallback" aria-hidden="true" hidden></div>
 
   <div class="top">
     <a class="mark" href="/">Chaitu</a>
-    <nav aria-label="Contact">
-      <a class="pill" href="https://github.com/ChaituVR">GitHub</a>
-      <a class="pill" href="https://x.com/chaituvr_s">X</a>
-      <a class="pill solid" href="https://t.me/chaituvr">Say hi</a>
-    </nav>
+    <span class="since">Snapshot core team since 2020</span>
   </div>
 
-  <div class="title">
-    <h1 class="name" aria-label="Chaitu">
-      <span style="--i:0">C</span><span style="--i:1">h</span><span style="--i:2">a</span><span style="--i:3">i</span><span style="--i:4">t</span><span style="--i:5">u</span>
-    </h1>
-    <p class="role">Builds governance infrastructure.<br>Right now: <span class="roll" id="roll" aria-live="polite"><b class="in">voting strategies</b><b>delegation on L2s</b><b>governance agents</b><b>every layer of Snapshot</b><b>your DAO's next problem</b></span></p>
+  <div class="views">
+    <section class="view on" id="view-name" aria-labelledby="name-h">
+      <h1 class="kinetic name" id="name-h" style="--i:0" data-text="Chaitu"></h1>
+      <p class="lead" style="--i:1">Builds governance infrastructure. Voting, delegation and the agents that will use both.</p>
+      <p class="hint" style="--i:2">Click the tunnel. Hold it. Then hit the buttons below.</p>
+    </section>
+
+    <section class="view" id="view-work" aria-labelledby="work-h" hidden>
+      <p class="hint" style="--i:0">What I work on</p>
+      <h2 class="kinetic head" id="work-h" style="--i:1" data-text=""></h2>
+      <p class="lead" id="work-desc" style="--i:2"></p>
+      <div class="chips" id="chips" role="group" aria-label="Areas of work" style="--i:3"></div>
+    </section>
+
+    <section class="view" id="view-hi" aria-labelledby="hi-h" hidden>
+      <h2 class="kinetic head" id="hi-h" style="--i:0" data-text="Say hi."></h2>
+      <p class="lead" style="--i:1">Taking contract work from October 2026. Remote, IST, fast replies.</p>
+      <div class="ways" style="--i:2">
+        <a class="pill" href="https://t.me/chaituvr">Telegram</a>
+        <button class="pill" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
+        <a class="pill" href="https://x.com/chaituvr_s">X</a>
+        <a class="pill" href="https://linkedin.com/in/chaituvr">LinkedIn</a>
+        <a class="pill" href="https://github.com/ChaituVR">GitHub</a>
+      </div>
+    </section>
   </div>
 
-  <div class="scroll-hint">
-    <span class="bob">↓ what I work on</span>
-    <span>Snapshot core team since 2020</span>
-  </div>
-</section>
+  <nav class="dock" aria-label="Sections">
+    <div class="seg" role="tablist" id="seg" style="--sel:0">
+      <button role="tab" aria-selected="true" data-view="name">Chaitu<kbd>1</kbd></button>
+      <button role="tab" aria-selected="false" data-view="work">Work<kbd>2</kbd></button>
+      <button role="tab" aria-selected="false" data-view="hi">Say hi<kbd>3</kbd></button>
+    </div>
+  </nav>
 
-<section class="work" id="work">
-  <h2>What I work on. Most of it is public, all of it shipped.</h2>
-  <ul class="lines" id="lines">
-    <li style="--i:0"><strong>Voting strategies</strong><span>Custom voting-power rules for DAOs. Dozens merged into snapshot-strategies, latest for Grove DAO's whitelisted delegation.</span></li>
-    <li style="--i:1"><strong>Delegation infra</strong><span>Delegate indexing on mainnet, Arbitrum and Starknet. Subgraphs, registries, the APIs delegates actually read.</span></li>
-    <li style="--i:2"><strong>Snapshot, every layer</strong><span>1,000+ merged PRs across the interface, SDK, sequencer, hub, scoring and billing. <a href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests">See them on GitHub</a>.</span></li>
-    <li style="--i:3"><strong>Governance agents</strong><span>A Snapshot MCP server so Claude and other agents can query, vote and propose. Claude Code hooks and routines that keep 25 repos merged.</span></li>
-    <li style="--i:4"><strong>Wallets and signatures</strong><span>EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.</span></li>
-  </ul>
-  <p class="foot">Vue, TypeScript, Node, GraphQL, subgraphs. Solidity and Cairo when the job needs them. <a href="#contact">Get in touch ↓</a></p>
-</section>
-
-<section class="contact" id="contact">
-  <div class="orb" id="orb" aria-hidden="true"></div>
-  <h2>Taking contract work from October 2026. Remote, IST, fast replies.</h2>
-  <p class="big">Say hi.</p>
-  <div class="ways">
-    <a class="pill" href="https://t.me/chaituvr">Telegram</a>
-    <button class="pill" type="button" id="copy" data-email="schaituvr@gmail.com">Copy email</button>
-    <a class="pill" href="https://x.com/chaituvr_s">X</a>
-    <a class="pill" href="https://linkedin.com/in/chaituvr">LinkedIn</a>
-    <a class="pill" href="https://github.com/ChaituVR">GitHub</a>
-  </div>
-  <p class="fine">Previously at Capgemini. Based in India.</p>
-</section>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</main>
 
 <script>
 (() => {
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = (s) => document.querySelector(s);
+
+  /* Kinetic text: one span per letter, words kept together */
+  const setText = (el, text) => {
+    el.replaceChildren();
+    let i = 0;
+    text.split(' ').forEach((word, w) => {
+      const box = document.createElement('i');
+      for (const ch of word) {
+        const s = document.createElement('span');
+        s.textContent = ch;
+        s.style.setProperty('--i', i++);
+        box.append(s);
+      }
+      el.append(box);
+    });
+    el.setAttribute('aria-label', text);
+  };
+  document.querySelectorAll('.kinetic[data-text]').forEach(el => { if (el.dataset.text) setText(el, el.dataset.text); });
 
   /* Tunnel */
-  const canvas = document.getElementById('tunnel');
+  const scenes = {
+    name: { a: [0.165, 0.17, 1.0], b: [1.0, 0.42, 0.24], twist: 3, speed: 1.0 },
+    work: { a: [0.05, 0.5, 1.0], b: [1.0, 0.32, 0.55], twist: 5, speed: 1.35 },
+    hi:   { a: [0.06, 0.06, 0.4], b: [1.0, 0.58, 0.36], twist: 2, speed: 0.55 }
+  };
+  const cur = { a: [...scenes.name.a], b: [...scenes.name.b], speed: 1 };
+  const tw = { from: 3, to: 3, mix: 1 };
+  let target = scenes.name;
+  let kick = 0;
+  let holding = false;
+  const click = { x: 0, y: 0, t: -10 };
+
+  const canvas = $('#tunnel');
   const gl = canvas.getContext('webgl', { antialias: false, alpha: false, powerPreference: 'low-power' });
+  let phase = 0, last = performance.now();
   if (!gl || reduce) {
     canvas.remove();
-    document.querySelector('.hero-fallback').hidden = false;
+    $('.fallback').hidden = false;
   } else {
     const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
     const fs = `
       precision highp float;
       uniform vec2 u_res; uniform float u_time; uniform vec2 u_mouse;
+      uniform vec3 u_a; uniform vec3 u_b; uniform vec3 u_twist; uniform vec3 u_click;
       void main() {
-        vec2 uv = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);
-        uv.x -= 0.18;
-        uv -= u_mouse * 0.12;
+        vec2 uv0 = (gl_FragCoord.xy - 0.5 * u_res) / min(u_res.x, u_res.y);
+        vec2 uv = uv0; uv.x -= 0.18; uv -= u_mouse * 0.12;
         float r = length(uv);
         float a = atan(uv.y, uv.x);
-        float t = u_time * 0.32;
+        float t = u_time;
         float depth = 1.0 / (r + 0.06);
-        float twist = a * 3.0 + sin(a * 2.0 + t * 0.7) * 0.9;
-        float s1 = sin(depth * 1.5 - t * 2.2 + twist);
+        float base = depth * 1.5 - t * 2.2 + sin(a * 2.0 + t * 0.7) * 0.9;
+        float s1 = mix(sin(base + a * u_twist.x), sin(base + a * u_twist.y), u_twist.z);
         float s2 = sin(depth * 0.7 - t * 1.4 - a * 2.0 + 1.7);
         float band = smoothstep(-0.12, 0.12, s1);
         float band2 = smoothstep(-0.4, 0.4, s2);
         float edge = 1.0 - smoothstep(0.0, 0.45, abs(s1));
-        vec3 blue = vec3(0.165, 0.17, 1.0);
-        vec3 coral = vec3(1.0, 0.42, 0.24);
         vec3 peach = vec3(1.0, 0.83, 0.72);
         vec3 pink = vec3(1.0, 0.45, 0.75);
-        vec3 col = mix(blue, coral, band);
-        col = mix(col, pink, band2 * 0.35 * (1.0 - band));
+        vec3 col = mix(u_a, u_b, band);
+        col = mix(col, pink, band2 * 0.3 * (1.0 - band));
         col = mix(col, peach, band * band2 * 0.35);
         col *= 1.0 - edge * 0.22;
         col = mix(col, peach, smoothstep(0.55, 0.0, r) * 0.7);
         col += vec3(1.0) * smoothstep(0.1, 0.0, r);
+        float age = u_click.z;
+        float d = length(uv0 - u_click.xy);
+        float ring = smoothstep(0.05, 0.0, abs(d - age * 1.1)) * max(0.0, 1.0 - age * 0.9);
+        col += vec3(1.0, 0.95, 0.85) * ring * 0.9;
         col *= 1.0 - smoothstep(0.75, 1.6, r) * 0.35;
         gl_FragColor = vec4(col, 1.0);
       }`;
@@ -294,15 +289,28 @@
     const loc = gl.getAttribLocation(prog, 'p');
     gl.enableVertexAttribArray(loc);
     gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    const uRes = gl.getUniformLocation(prog, 'u_res');
-    const uTime = gl.getUniformLocation(prog, 'u_time');
-    const uMouse = gl.getUniformLocation(prog, 'u_mouse');
+    const U = {};
+    ['u_res', 'u_time', 'u_mouse', 'u_a', 'u_b', 'u_twist', 'u_click'].forEach(n => { U[n] = gl.getUniformLocation(prog, n); });
 
     const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
     addEventListener('pointermove', e => {
       mouse.tx = (e.clientX / innerWidth - 0.5) * 2;
       mouse.ty = -(e.clientY / innerHeight - 0.5) * 2;
     }, { passive: true });
+
+    const toUv = (e) => {
+      const m = Math.min(canvas.clientWidth, canvas.clientHeight);
+      return [(e.clientX - canvas.clientWidth / 2) / m, (canvas.clientHeight / 2 - e.clientY) / m];
+    };
+    canvas.addEventListener('pointerdown', e => {
+      [click.x, click.y] = toUv(e);
+      click.t = performance.now();
+      holding = true;
+      canvas.setPointerCapture(e.pointerId);
+    });
+    const release = () => { holding = false; };
+    canvas.addEventListener('pointerup', release);
+    canvas.addEventListener('pointercancel', release);
 
     const resize = () => {
       const dpr = Math.min(devicePixelRatio || 1, 1.5);
@@ -313,16 +321,26 @@
     addEventListener('resize', resize, { passive: true });
     resize();
 
-    let visible = true;
-    new IntersectionObserver(([e]) => { visible = e.isIntersecting; }).observe(canvas);
-    const start = performance.now();
+    const lerp = (a, b, k) => a + (b - a) * k;
     const frame = (now) => {
-      if (visible && !document.hidden) {
+      const dt = Math.min((now - last) / 1000, 0.05);
+      last = now;
+      if (!document.hidden) {
+        const want = target.speed * (holding ? 3.2 : 1) + kick;
+        kick *= 0.94;
+        cur.speed = lerp(cur.speed, want, 0.06);
+        tw.mix = lerp(tw.mix, 1, 0.035);
+        for (let i = 0; i < 3; i++) { cur.a[i] = lerp(cur.a[i], target.a[i], 0.04); cur.b[i] = lerp(cur.b[i], target.b[i], 0.04); }
+        phase += dt * 0.32 * cur.speed;
         mouse.x += (mouse.tx - mouse.x) * 0.05;
         mouse.y += (mouse.ty - mouse.y) * 0.05;
-        gl.uniform2f(uRes, canvas.width, canvas.height);
-        gl.uniform1f(uTime, (now - start) / 1000);
-        gl.uniform2f(uMouse, mouse.x, mouse.y);
+        gl.uniform2f(U.u_res, canvas.width, canvas.height);
+        gl.uniform1f(U.u_time, phase);
+        gl.uniform2f(U.u_mouse, mouse.x, mouse.y);
+        gl.uniform3fv(U.u_a, cur.a);
+        gl.uniform3fv(U.u_b, cur.b);
+        gl.uniform3f(U.u_twist, tw.from, tw.to, tw.mix);
+        gl.uniform3f(U.u_click, click.x, click.y, (now - click.t) / 1000);
         gl.drawArrays(gl.TRIANGLES, 0, 3);
       }
       requestAnimationFrame(frame);
@@ -330,72 +348,107 @@
     requestAnimationFrame(frame);
   }
 
-  /* Rolling role */
-  const roll = document.getElementById('roll');
-  const words = [...roll.children];
-  let idx = 0;
-  if (!reduce) {
-    setInterval(() => {
-      const cur = words[idx];
-      idx = (idx + 1) % words.length;
-      const next = words[idx];
-      cur.classList.remove('in'); cur.classList.add('out');
-      next.classList.remove('out'); next.classList.add('in');
-      setTimeout(() => cur.classList.remove('out'), 600);
-    }, 2400);
-  }
+  /* Work items */
+  const work = [
+    { t: 'Voting strategies', d: 'Custom voting-power rules for DAOs. Merged into snapshot-strategies, most recently whitelisted delegation for Grove DAO.' },
+    { t: 'Delegation infra', d: 'Delegate indexing on mainnet, Arbitrum and Starknet. Subgraphs, registries, and the APIs delegates actually read.' },
+    { t: 'Snapshot, every layer', d: '1,000+ merged PRs across the interface, SDK, sequencer, hub, scoring and billing.', link: ['See them on GitHub', 'https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests'] },
+    { t: 'Governance agents', d: 'A Snapshot MCP server so Claude and other agents can query, vote and propose. Claude Code hooks and routines that keep 25 repos merged.' },
+    { t: 'Wallets and signatures', d: 'EIP-712 across MetaMask, Rabby, Frame and Ledger, including the Starknet path nobody else wanted to debug.' }
+  ];
+  const chips = $('#chips');
+  const workH = $('#work-h');
+  const workD = $('#work-desc');
+  let workIdx = 0;
+  const showWork = (i) => {
+    workIdx = i;
+    const w = work[i];
+    setText(workH, w.t);
+    workD.textContent = w.d + ' ';
+    if (w.link) {
+      const a = document.createElement('a');
+      a.href = w.link[1]; a.textContent = w.link[0];
+      workD.append(a, '.');
+    }
+    chips.querySelectorAll('button').forEach((b, j) => b.setAttribute('aria-pressed', String(j === i)));
+    kick = 2.5;
+  };
+  work.forEach((w, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'pill'; b.textContent = w.t;
+    b.setAttribute('aria-pressed', 'false');
+    b.addEventListener('click', () => showWork(i));
+    chips.append(b);
+  });
+  showWork(0);
 
-  /* Reveal work lines */
-  const lines = document.querySelectorAll('#lines li');
-  const io = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); } });
-  }, { threshold: 0.2 });
-  lines.forEach(li => io.observe(li));
+  /* Views */
+  const views = { name: $('#view-name'), work: $('#view-work'), hi: $('#view-hi') };
+  const order = ['name', 'work', 'hi'];
+  const seg = $('#seg');
+  let active = 'name';
+  let swapTimer = 0;
+  const show = (key) => {
+    if (key === active) return;
+    const from = views[active], to = views[key];
+    active = key;
+    target = scenes[key];
+    if (tw.to !== target.twist) { tw.from = tw.to; tw.to = target.twist; tw.mix = 0; }
+    kick = 1.5;
+    seg.style.setProperty('--sel', order.indexOf(key));
+    seg.querySelectorAll('button').forEach(b => b.setAttribute('aria-selected', String(b.dataset.view === key)));
+    from.classList.remove('on'); from.classList.add('off');
+    clearTimeout(swapTimer);
+    swapTimer = setTimeout(() => {
+      from.classList.remove('off'); from.hidden = true;
+      to.hidden = false; to.classList.add('on');
+      const k = to.querySelector('.kinetic');
+      if (k) setText(k, k.getAttribute('aria-label') || k.dataset.text);
+    }, reduce ? 0 : 300);
+  };
+  seg.addEventListener('click', e => {
+    const b = e.target.closest('button[data-view]');
+    if (b) show(b.dataset.view);
+  });
+  addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === '1' || e.key === '2' || e.key === '3') show(order[+e.key - 1]);
+    if (active === 'work' && (e.key === 'ArrowRight' || e.key === 'ArrowLeft')) {
+      showWork((workIdx + (e.key === 'ArrowRight' ? 1 : work.length - 1)) % work.length);
+    }
+  });
 
   /* Magnetic pills */
   if (!reduce && matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.pill').forEach(el => {
-      el.addEventListener('pointermove', e => {
-        const r = el.getBoundingClientRect();
-        const dx = (e.clientX - (r.left + r.width / 2)) / r.width;
-        const dy = (e.clientY - (r.top + r.height / 2)) / r.height;
-        el.style.transform = `translate(${dx * 10}px, ${dy * 10}px)`;
-      });
-      el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+    document.addEventListener('pointermove', e => {
+      const el = e.target.closest('.pill');
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) / r.width * 8}px, ${(e.clientY - r.top - r.height / 2) / r.height * 8}px)`;
+    });
+    document.addEventListener('pointerout', e => {
+      const el = e.target.closest('.pill');
+      if (el) el.style.transform = '';
     });
   }
 
-  /* Orb follows the pointer inside contact */
-  const contact = document.getElementById('contact');
-  const orb = document.getElementById('orb');
-  if (!reduce) {
-    const pos = { x: 0, y: 0, tx: 0, ty: 0 };
-    contact.addEventListener('pointermove', e => {
-      const r = contact.getBoundingClientRect();
-      pos.tx = (e.clientX - r.left - r.width * 0.76) * 0.35;
-      pos.ty = (e.clientY - r.top - r.height * 0.5) * 0.35;
-    }, { passive: true });
-    const tick = () => {
-      pos.x += (pos.tx - pos.x) * 0.06;
-      pos.y += (pos.ty - pos.y) * 0.06;
-      orb.style.transform = `translate(calc(-50% + ${pos.x}px), calc(-50% + ${pos.y}px))`;
-      requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }
-
   /* Copy email */
-  const copy = document.getElementById('copy');
-  copy.addEventListener('click', async () => {
-    const email = copy.dataset.email;
+  const toast = $('#toast');
+  let toastTimer = 0;
+  const say = (msg) => {
+    toast.textContent = msg; toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+  };
+  $('#copy').addEventListener('click', async (e) => {
+    const email = e.currentTarget.dataset.email;
     try {
       await navigator.clipboard.writeText(email);
-      copy.textContent = 'Copied';
-    } catch (e) {
+      say('Copied ' + email);
+      kick = 2;
+    } catch (err) {
       location.href = 'mailto:' + email;
-      return;
     }
-    setTimeout(() => { copy.textContent = 'Copy email'; }, 1800);
   });
 })();
 </script>
