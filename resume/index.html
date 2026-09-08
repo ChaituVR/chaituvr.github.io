@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chaitu — resume</title>
+<meta name="description" content="Resume of Chaitanya Surneddi (Chaitu), governance infrastructure engineer. Ten years shipping software, six on Snapshot's core team.">
+<link rel="canonical" href="https://chaituvr.github.io/resume/">
+<meta property="og:title" content="Chaitu — resume">
+<meta property="og:description" content="Governance infrastructure engineer. Ten years shipping software, six on Snapshot's core team.">
+<meta property="og:url" content="https://chaituvr.github.io/resume/">
+<meta property="og:image" content="https://chaituvr.github.io/images/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#2A2BFF">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,200..800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #2A2BFF;
+    --navy: #0E0F5C;
+    --ink: #14151f;
+    --muted: #5b5d7a;
+    --line: #dcdcf0;
+    --yellow: #F7EC4F;
+    --paper: #fbfbff;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, system-ui, sans-serif;
+    font-variation-settings: "opsz" 14, "wdth" 100, "wght" 400;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  a { color: var(--blue); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 0.15em; }
+  .page { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+  .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem; }
+  .back { font-size: 0.95rem; color: var(--muted); }
+  .back:hover { color: var(--blue); }
+  .print {
+    font: inherit; font-weight: 600; font-size: 0.95rem;
+    border: 2px solid var(--blue); border-radius: 999px;
+    background: var(--blue); color: #fff; padding: 0.5rem 1.1rem; cursor: pointer;
+  }
+  .print:hover { background: var(--navy); border-color: var(--navy); }
+  h1 {
+    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
+    font-size: clamp(2.6rem, 8vw, 4rem); line-height: 0.95; letter-spacing: -0.02em;
+    margin: 0 0 0.5rem; color: var(--navy);
+  }
+  .title { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.75rem; color: var(--blue); }
+  .contact { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.95rem; }
+  .contact a { color: var(--ink); }
+  .summary { font-size: 1.1rem; margin: 1.75rem 0 0; max-width: 62ch; }
+  h2 {
+    font-variation-settings: "opsz" 24, "wdth" 90, "wght" 700;
+    font-size: 0.95rem; letter-spacing: 0.02em; color: var(--blue);
+    margin: 2.5rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--line);
+  }
+  .job { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1.5rem; margin-bottom: 1.5rem; break-inside: avoid; }
+  .job h3 { margin: 0; font-size: 1.15rem; font-variation-settings: "opsz" 24, "wdth" 100, "wght" 700; }
+  .job .where { color: var(--muted); grid-column: 1; }
+  .job .when { color: var(--muted); text-align: right; white-space: nowrap; grid-row: 1; grid-column: 2; }
+  .job ul { grid-column: 1 / -1; margin: 0.5rem 0 0; padding-left: 1.2rem; }
+  .job li { margin: 0.25rem 0; max-width: 70ch; }
+  .job li::marker { color: var(--blue); }
+  .projects { display: grid; gap: 1rem; }
+  .project { break-inside: avoid; }
+  .project h3 { margin: 0 0 0.2rem; font-size: 1.05rem; font-variation-settings: "opsz" 24, "wdth" 100, "wght" 700; }
+  .project p { margin: 0; max-width: 70ch; }
+  .skills { display: grid; grid-template-columns: 9rem 1fr; gap: 0.35rem 1rem; margin: 0; }
+  .skills dt { color: var(--muted); }
+  .skills dd { margin: 0; }
+  @media (max-width: 560px) {
+    .page { padding-top: 2rem; }
+    .job { grid-template-columns: 1fr; }
+    .job .when { grid-row: auto; grid-column: 1; text-align: left; }
+    .skills { grid-template-columns: 1fr; gap: 0.1rem; }
+    .skills dt { margin-top: 0.5rem; }
+  }
+  @page { size: A4; margin: 14mm 16mm; }
+  @media print {
+    body { background: #fff; font-size: 10.5pt; line-height: 1.4; }
+    .page { max-width: none; padding: 0; }
+    .top { display: none; }
+    h1 { font-size: 30pt; }
+    .title { font-size: 12.5pt; margin-bottom: 0.4rem; }
+    .summary { font-size: 10.5pt; margin-top: 1rem; }
+    h2 { margin-top: 1.4rem; margin-bottom: 0.5rem; }
+    .job { margin-bottom: 0.9rem; }
+    a { color: var(--ink); }
+    .contact a, .project a { color: var(--blue); }
+  }
+</style>
+</head>
+<body>
+<main class="page">
+  <div class="top">
+    <a class="back" href="/">← chaituvr.github.io</a>
+    <button class="print" type="button" onclick="window.print()">Save as PDF</button>
+  </div>
+
+  <header>
+    <h1>Chaitanya Surneddi</h1>
+    <p class="title">Governance infrastructure engineer</p>
+    <ul class="contact">
+      <li><a href="mailto:schaituvr@gmail.com">schaituvr@gmail.com</a></li>
+      <li><a href="https://chaituvr.github.io">chaituvr.github.io</a></li>
+      <li><a href="https://github.com/ChaituVR">github.com/ChaituVR</a></li>
+      <li><a href="https://linkedin.com/in/chaituvr">linkedin.com/in/chaituvr</a></li>
+      <li><a href="https://t.me/chaituvr">t.me/chaituvr</a></li>
+      <li>Remote, IST</li>
+    </ul>
+    <p class="summary">Ten years shipping software, six on Snapshot's core team. I build the rails DAOs vote on: voting power, delegation, signatures, and now the agents that use them. Over 1,000 merged pull requests across a 25-repo organisation, from the Vue interface to the sequencer, indexers and billing.</p>
+  </header>
+
+  <h2>Experience</h2>
+
+  <article class="job">
+    <h3>Snapshot Labs</h3>
+    <span class="when">2020 to present</span>
+    <span class="where">Software engineer, core team. Remote.</span>
+    <ul>
+      <li>Shipped across every layer of Snapshot, the voting platform used by most DAOs: the interface (sx-monorepo, snapshot-v1), the SDK (snapshot.js), the sequencer and relayer, the hub GraphQL API, the score API and subgraphs, and billing.</li>
+      <li>Wrote custom voting-power strategies for DAOs in snapshot-strategies, most recently whitelisted delegation for Grove DAO.</li>
+      <li>Built delegation indexing on mainnet, Arbitrum and Starknet: subgraphs, registries and the delegate APIs that dashboards read.</li>
+      <li>Worked on Snapshot X onchain voting on Starknet and EVM, with spaces, proposals and votes settled onchain and indexed by Checkpoint.</li>
+      <li>Owned EIP-712 signing across MetaMask, Rabby, Frame, Safe and Ledger, including the Starknet path and its eth-sig and eth-tx fallbacks.</li>
+      <li>Ran infra and billing: API keys and rate limits (keycard), RPC routing (brovider), avatars (stamp), webhooks and Discord bots.</li>
+      <li>Built a Snapshot MCP server so Claude and other agents can query, vote and propose, plus Claude Code hooks and scheduled routines that keep 25 repos reviewed and merged.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <h3>Capgemini</h3>
+    <span class="when">2018 to 2020</span>
+    <span class="where">Consultant. Hyderabad, for Discover Financial Services.</span>
+    <ul>
+      <li>Built React and Redux modules and the GraphQL layer for Action, the call-center desktop app used by Discover's customer-care teams, packaged with Electron.</li>
+      <li>Set up the component workflow with Material UI, Storybook, and Jest and Enzyme tests.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <h3>Innovate Apps</h3>
+    <span class="when">2016 to 2018</span>
+    <span class="where">Software programmer. Visakhapatnam, for TransUnion.</span>
+    <ul>
+      <li>Built the ACCT data-quality dashboard with React, Redux, D3, Node, Express and GraphQL.</li>
+      <li>Shipped a phone-lookup app on React and Node, and worked on TLOxp identity verification in PHP, Zend and MySQL.</li>
+    </ul>
+  </article>
+
+  <article class="job">
+    <h3>Upwork</h3>
+    <span class="when">2019 to 2020</span>
+    <span class="where">Freelance, alongside full-time work.</span>
+    <ul>
+      <li>35 contracts and 522 hours, rated 4.9 across 29 reviews. AWS Lambda services, Firebase functions, and build-tooling rescues for people who needed them done that week.</li>
+    </ul>
+  </article>
+
+  <h2>Selected work</h2>
+  <div class="projects">
+    <div class="project">
+      <h3><a href="https://mockwallet.dev">Mock Wallet</a></h3>
+      <p>A browser wallet for testing dApps. Many accounts from one seed, WalletConnect v2, EIP-712 signing, watch-only impersonation of any address, and an agent mode that auto-approves so end-to-end tests can drive it from a URL. Next.js, ethers.js, Reown WalletKit. MIT, on <a href="https://github.com/ChaituVR/mock-wallet">GitHub</a>.</p>
+    </div>
+    <div class="project">
+      <h3>Snapshot MCP server</h3>
+      <p>Governance for agents: query spaces and proposals, check voting power, vote and propose from Claude and other MCP clients, with the user's wallet bound server-side.</p>
+    </div>
+    <div class="project">
+      <h3><a href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests">1,000+ merged PRs at snapshot-labs</a></h3>
+      <p>sx-monorepo, snapshot-v1, snapshot.js, snapshot-sequencer, snapshot-hub, snapshot-strategies, score-api, delegate-registry-api, delegates-api, keycard, brovider, stamp, snapshot-webhook.</p>
+    </div>
+  </div>
+
+  <h2>Skills</h2>
+  <dl class="skills">
+    <dt>Languages</dt><dd>TypeScript, JavaScript, Solidity, Cairo, SQL, PHP</dd>
+    <dt>Frontend</dt><dd>Vue, React, Redux, Vite, Tailwind, Storybook, Playwright, Vitest</dd>
+    <dt>Backend</dt><dd>Node.js, Express, GraphQL, Apollo, Postgres, MySQL, Redis, Docker, GitHub Actions</dd>
+    <dt>Web3</dt><dd>Ethereum, Starknet, EIP-712, ethers.js, viem, starknet.js, WalletConnect, Safe, The Graph, Checkpoint, OpenZeppelin Governor</dd>
+    <dt>Agents</dt><dd>MCP, Claude Code, OpenAI API</dd>
+  </dl>
+
+  <h2>Education</h2>
+  <article class="job">
+    <h3>GITAM University</h3>
+    <span class="when">2011 to 2015</span>
+    <span class="where">B.Tech, Industrial Engineering.</span>
+  </article>
+</main>
+</body>
+</html>
