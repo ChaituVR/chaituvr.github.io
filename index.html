@@ -165,6 +165,24 @@
   .ways .pill { font-size: clamp(1rem, 1.5vw, 1.25rem); padding: 0.8rem 1.3rem; }
   .ways .pill:hover { background: var(--white); color: var(--navy); }
 
+  .heat { display: grid; gap: 0.5rem; }
+  .heat .cap {
+    margin: 0; font-size: clamp(0.9rem, 1.2vw, 1.05rem); opacity: 0.85;
+    font-variation-settings: "opsz" 24, "wdth" 92, "wght" 500;
+  }
+  .heat .cap b { color: var(--yellow); font-variation-settings: "opsz" 24, "wdth" 92, "wght" 700; }
+  .heat .scroll { overflow-x: auto; scrollbar-width: none; }
+  .heat .scroll::-webkit-scrollbar { display: none; }
+  .grid { display: grid; grid-auto-flow: column; grid-template-rows: repeat(7, 11px); grid-auto-columns: 11px; gap: 3px; width: max-content; }
+  .grid i { display: block; border-radius: 2px; background: rgba(255,255,255,0.14); }
+  .grid i.pad { visibility: hidden; }
+  .grid i.l1 { background: rgba(255,211,184,0.45); }
+  .grid i.l2 { background: var(--peach); }
+  .grid i.l3 { background: var(--coral); }
+  .grid i.l4 { background: var(--yellow); }
+  .grid i:hover { outline: 2px solid var(--white); outline-offset: 1px; }
+  .view.on .grid i { animation: pop 0.5s var(--spring) backwards; animation-delay: calc(var(--w) * 8ms + 350ms); }
+
   .wipe {
     position: fixed; inset: -10% -30%; z-index: 5; pointer-events: none; opacity: 0;
     background: linear-gradient(100deg, transparent 32%, var(--peach) 44%, var(--yellow) 50%, var(--coral) 56%, transparent 68%);
@@ -219,7 +237,7 @@
   .seg button[aria-selected="true"] { color: var(--navy); }
 
   @media (prefers-reduced-motion: reduce) {
-    .view.on > *, .view.off > *, .kinetic span, .tag, .view.on .pill, .wipe.go, .hi-card, .burst span,
+    .view.on > *, .view.off > *, .kinetic span, .tag, .view.on .pill, .view.on .grid i, .wipe.go, .hi-card, .burst span,
     .marquee .track { animation: none; opacity: 1; transform: none; }
     .kinetic span { font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800; transition: none; }
     .seg::before, .pill { transition: none; }
@@ -239,6 +257,11 @@
     .chips::-webkit-scrollbar { display: none; }
     .chips .pill { flex: none; }
     .chips.dragging { cursor: grabbing; }
+    .heat .scroll {
+      width: 100vw; margin-left: calc(-1 * var(--pad)); padding: 0 var(--pad);
+      -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+      mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+    }
   }
   @media (max-height: 30rem) { .name { font-size: clamp(3rem, 12vh, 6rem); } }
 </style>
@@ -278,7 +301,11 @@
       <p class="role" style="--i:0">Hey, I'm</p>
       <h1 class="kinetic name" id="name-h" style="--i:1" data-text="Chaitu"></h1>
       <p class="lead" style="--i:2">Ten years shipping software, six on Snapshot's core team. I build the rails DAOs vote on: voting power, delegation, signatures, and now the agents that use them.</p>
-      <div class="marquee" id="stack" style="--i:3" aria-label="Stack"></div>
+      <div class="heat" id="heat" style="--i:3" hidden>
+        <p class="cap"><b>0</b> contributions on GitHub in the last year, as of <span id="heat-date"></span>.</p>
+        <div class="scroll"><div class="grid" role="img" aria-label="GitHub contribution calendar for the last year"></div></div>
+      </div>
+      <div class="marquee" id="stack" style="--i:4" aria-label="Stack"></div>
     </section>
 
     <section class="view" id="view-work" aria-labelledby="work-h" hidden>
@@ -745,6 +772,29 @@
     clearTimeout(copyTimer);
     copyTimer = setTimeout(() => { copy.textContent = 'Copy email'; copy.classList.remove('done'); }, 2000);
   });
+
+  fetch('/data/contributions.json')
+    .then(r => r.ok ? r.json() : Promise.reject(r.status))
+    .then(d => {
+      const heat = document.getElementById('heat');
+      const grid = heat.querySelector('.grid');
+      const day = new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric' });
+      const parse = iso => new Date(iso + 'T00:00:00');
+      for (let k = parse(d.weeks[0][0][0]).getDay(); k > 0; k--) grid.append(Object.assign(document.createElement('i'), { className: 'pad' }));
+      d.weeks.forEach((week, w) => week.forEach(([date, n, level]) => {
+        const cell = document.createElement('i');
+        cell.className = 'l' + level;
+        cell.style.setProperty('--w', w);
+        cell.title = `${n} contribution${n === 1 ? '' : 's'} on ${day.format(parse(date))}`;
+        grid.append(cell);
+      }));
+      heat.querySelector('b').textContent = d.total.toLocaleString('en');
+      document.getElementById('heat-date').textContent = day.format(parse(d.updated));
+      heat.hidden = false;
+      const scroll = heat.querySelector('.scroll');
+      scroll.scrollLeft = scroll.scrollWidth;
+    })
+    .catch(() => {});
 })();
 </script>
 </body>
