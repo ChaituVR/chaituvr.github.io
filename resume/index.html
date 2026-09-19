@@ -22,138 +22,222 @@
   :root {
     --blue: #2A2BFF;
     --navy: #0E0F5C;
-    --ink: #14151f;
-    --muted: #5b5d7a;
-    --line: #dcdcf0;
+    --ink: #222333;
+    --muted: #626374;
+    --line: #dedee7;
     --yellow: #F7EC4F;
-    --paper: #fbfbff;
+    --paper: #fff;
   }
   * { box-sizing: border-box; }
-  html { -webkit-text-size-adjust: 100%; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
   body {
     margin: 0;
-    background: var(--paper);
+    background: #f2f3f7;
     color: var(--ink);
-    font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, system-ui, sans-serif;
-    font-variation-settings: "opsz" 14, "wdth" 100, "wght" 400;
+    font-family: "Helvetica Neue", Arial, system-ui, sans-serif;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.65;
   }
-  a { color: var(--blue); text-decoration: none; }
+  a { color: var(--blue); text-decoration: none; overflow-wrap: anywhere; }
   a:hover { text-decoration: underline; text-underline-offset: 0.15em; }
-  .page { max-width: 780px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
-  .top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2.5rem; }
-  .back { font-size: 0.95rem; color: var(--muted); }
-  .back:hover { color: var(--blue); }
+  a:focus-visible, button:focus-visible { outline: 3px solid var(--blue); outline-offset: 5px; }
+  ::selection { background: var(--yellow); color: var(--navy); }
+  .page { max-width: 1120px; margin: 0 auto 4rem; padding: 3.5rem 4rem; background: var(--paper); border-top: 6px solid var(--blue); }
+  .top { max-width: 1120px; margin: 0 auto; padding: 1.25rem 0; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .back { display: inline-flex; align-items: center; color: var(--navy); font-size: 0.875rem; font-weight: 600; }
   .print {
-    font: inherit; font-weight: 600; font-size: 0.95rem;
-    border: 2px solid var(--blue); border-radius: 999px;
-    background: var(--blue); color: #fff; padding: 0.5rem 1.1rem; cursor: pointer;
+    font: inherit; font-weight: 600; font-size: 0.875rem;
+    border: 1px solid var(--navy); border-radius: 6px;
+    background: var(--navy); color: #fff; padding: 0.65rem 1rem; cursor: pointer;
   }
-  .print:hover { background: var(--navy); border-color: var(--navy); }
+  .print:hover { background: var(--blue); border-color: var(--blue); }
+  h1, h2, h3, .title, .metric strong { font-family: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif; }
+  .eyebrow { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 2rem; color: var(--muted); font-size: 0.8125rem; }
+  .eyebrow span:first-child { text-transform: uppercase; letter-spacing: 0.15em; font-weight: 600; }
+  .location { color: var(--navy); border: 1px solid var(--line); border-radius: 99px; padding: 0.3rem 0.8rem; white-space: nowrap; }
+  .intro { display: grid; grid-template-columns: minmax(0, 1fr) 240px; align-items: end; gap: 3rem; }
   h1 {
-    font-variation-settings: "opsz" 96, "wdth" 100, "wght" 800;
-    font-size: clamp(2.6rem, 8vw, 4rem); line-height: 0.95; letter-spacing: -0.02em;
-    margin: 0 0 0.5rem; color: var(--navy);
+    font-weight: 800; font-optical-sizing: auto;
+    font-size: clamp(3rem, 6.5vw, 4.75rem); line-height: 0.98; letter-spacing: -0.045em;
+    margin: 0 0 1.25rem; color: var(--navy);
   }
-  .title { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.75rem; color: var(--blue); }
-  .contact { display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: 0.95rem; }
-  .contact a { color: var(--ink); }
-  .summary { font-size: 1.1rem; margin: 1.75rem 0 0; max-width: 62ch; }
+  .nickname { font-size: 0.38em; font-weight: 600; letter-spacing: -0.02em; color: var(--muted); white-space: nowrap; }
+  .title { font-size: 1.3rem; line-height: 1.4; font-weight: 600; margin: 0; color: var(--blue); max-width: 25ch; }
+  .contact { display: grid; gap: 0.4rem; margin: 0; padding: 0 0 0 1.5rem; border-left: 1px solid var(--line); list-style: none; font-size: 0.875rem; }
+  .contact a { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--muted); }
+  .contact-icon { width: 1rem; height: 1rem; flex: 0 0 1rem; color: #8b8c9d; }
+  .contact a:hover { color: var(--blue); }
+  .contact li:first-child a { color: var(--navy); font-weight: 600; }
+  .summary { font-size: 1.125rem; line-height: 1.65; margin: 2rem 0; max-width: 72ch; }
+  .metrics { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); margin: 0 0 3rem; border-block: 1px solid var(--line); padding: 1.25rem 0; }
+  .metric { margin: 0; padding: 0 1.5rem; border-left: 1px solid var(--line); }
+  .metric:first-child { padding-left: 0; border-left: 0; }
+  .metric strong { display: block; font-size: 1.625rem; line-height: 1.2; color: var(--navy); letter-spacing: -0.03em; }
+  .metric span { display: block; margin-top: 0.35rem; font-size: 0.875rem; color: var(--muted); }
+  .content { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 3.5rem; }
   h2 {
-    font-variation-settings: "opsz" 24, "wdth" 90, "wght" 700;
-    font-size: 0.95rem; letter-spacing: 0.02em; color: var(--blue);
-    margin: 2.5rem 0 0.9rem; padding-bottom: 0.4rem; border-bottom: 2px solid var(--line);
+    font-size: 0.8125rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--blue);
+    margin: 0 0 1.5rem; display: flex; align-items: center; gap: 0.75rem;
   }
-  .job { display: grid; grid-template-columns: 1fr auto; gap: 0.2rem 1.5rem; margin-bottom: 1.5rem; break-inside: avoid; }
-  .job h3 { margin: 0; font-size: 1.15rem; font-variation-settings: "opsz" 24, "wdth" 100, "wght" 700; }
-  .job .where { color: var(--muted); grid-column: 1; }
-  .job .when { color: var(--muted); text-align: right; white-space: nowrap; grid-row: 1; grid-column: 2; }
-  .job ul { grid-column: 1 / -1; margin: 0.5rem 0 0; padding-left: 1.2rem; }
-  .job li { margin: 0.25rem 0; max-width: 70ch; }
-  .job li::marker { color: var(--blue); }
-  .projects { display: grid; gap: 1rem; }
-  .project { break-inside: avoid; }
-  .project h3 { margin: 0 0 0.2rem; font-size: 1.05rem; font-variation-settings: "opsz" 24, "wdth" 100, "wght" 700; }
-  .project p { margin: 0; max-width: 70ch; }
-  .skills { display: grid; grid-template-columns: 9rem 1fr; gap: 0.35rem 1rem; margin: 0; }
-  .skills dt { color: var(--muted); }
-  .skills dd { margin: 0; }
-  @media (max-width: 560px) {
-    .page { padding-top: 2rem; }
-    .job { grid-template-columns: 1fr; }
-    .job .when { grid-row: auto; grid-column: 1; text-align: left; }
-    .skills { grid-template-columns: 1fr; gap: 0.1rem; }
-    .skills dt { margin-top: 0.5rem; }
+  h2::after { content: ""; height: 1px; background: var(--line); flex: 1; }
+  .job { position: relative; padding: 0 0 2rem 1.5rem; border-left: 1px solid var(--line); }
+  .job::before { content: ""; position: absolute; top: 0.5rem; left: -5px; width: 9px; height: 9px; border-radius: 50%; background: var(--paper); border: 2px solid #a4a5b7; }
+  .job:first-of-type::before { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 0 4px #ededff; }
+  .job:last-child { padding-bottom: 0; }
+  .job-heading { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.15rem 1rem; }
+  h3 { color: var(--navy); font-weight: 700; line-height: 1.3; }
+  .job h3 { margin: 0; font-size: 1.25rem; letter-spacing: -0.025em; }
+  .company-link { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--navy); }
+  .company-logo { width: 28px; height: 28px; flex: 0 0 28px; border: 1px solid var(--line); border-radius: 7px; object-fit: contain; background: #fff; padding: 3px; }
+  .where { margin: 0.4rem 0 0; font-size: 0.875rem; color: var(--muted); }
+  .when { color: var(--muted); font-size: 0.8125rem; white-space: nowrap; font-variant-numeric: tabular-nums; }
+  .job ul { margin: 0.85rem 0 0; padding-left: 1rem; }
+  .job li { margin: 0.5rem 0; padding-left: 0.2rem; }
+  .job li::marker { color: #9b9bad; font-size: 0.75em; }
+  .sidebar section + section { margin-top: 2.5rem; }
+  .sidebar h2 { margin-bottom: 1.15rem; }
+  .skills { margin: 0; }
+  .skills dt { font-size: 0.875rem; font-weight: 600; color: var(--navy); margin: 1rem 0 0.2rem; }
+  .skills dt:first-child { margin-top: 0; }
+  .skills dd { margin: 0; color: var(--muted); }
+  .project + .project { margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--line); }
+  .project h3, .education h3 { margin: 0 0 0.4rem; font-size: 1.0625rem; }
+  .project-label { display: block; margin-bottom: 0.4rem; color: var(--blue); font-size: 0.75rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .project h3 a { color: var(--navy); text-decoration: underline; text-decoration-color: #b8b8cd; text-underline-offset: 0.25em; }
+  .project p, .education p { margin: 0; color: var(--muted); }
+  .project .project-link { display: inline-block; font-size: 0.875rem; margin-top: 0.5rem; }
+  .education .when { display: block; margin-bottom: 0.5rem; }
+  .footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 0.5rem; margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--line); font-size: 0.8125rem; color: var(--muted); }
+  @media (max-width: 1180px) {
+    .top { margin-inline: 1.5rem; }
+    .page { margin-inline: 1.5rem; padding: 3rem; }
+    .content { gap: 2.5rem; }
   }
-  @page { size: A4; margin: 14mm 16mm; }
+  @media (max-width: 850px) {
+    .intro { grid-template-columns: 1fr; gap: 1.5rem; }
+    .contact { display: flex; flex-wrap: wrap; gap: 0.5rem 1.25rem; padding: 0; border: 0; }
+    .title { max-width: none; }
+    .content { grid-template-columns: 1fr; }
+    .sidebar { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 2rem; }
+    .sidebar section + section { margin-top: 0; }
+  }
+  @media (max-width: 540px) {
+    body { background: var(--paper); }
+    .top { margin: 0; padding: 1rem 1.25rem; }
+    .page { margin: 0; padding: 1.75rem 1.25rem 2rem; border-top-width: 4px; }
+    .eyebrow { margin-bottom: 1.75rem; }
+    h1 { font-size: clamp(2.75rem, 12vw, 4rem); }
+    .title { font-size: 1.125rem; }
+    .summary { font-size: 1rem; }
+    .metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-bottom: 2rem; gap: 0; }
+    .metric { padding: 0 0 0 0.75rem; }
+    .metric:nth-child(odd) { padding-left: 0; border-left: 0; }
+    .metric:nth-child(n + 3) { margin-top: 0.75rem; padding-top: 0.75rem; border-top: 1px solid var(--line); }
+    .metric strong { font-size: 1.0625rem; }
+    .metric span { font-size: 0.8125rem; }
+    .job { padding-left: 1.15rem; }
+    .sidebar { grid-template-columns: 1fr; }
+    .sidebar section + section { margin-top: 0.5rem; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @page { size: A4; margin: 13mm 15mm; }
   @media print {
-    body { background: #fff; font-size: 10.5pt; line-height: 1.4; }
-    .page { max-width: none; padding: 0; }
-    .top { display: none; }
-    h1 { font-size: 30pt; }
-    .title { font-size: 12.5pt; margin-bottom: 0.4rem; }
-    .summary { font-size: 10.5pt; margin-top: 1rem; }
-    h2 { margin-top: 1.4rem; margin-bottom: 0.5rem; }
-    .job { margin-bottom: 0.9rem; }
+    body { background: #fff; font-size: 10pt; line-height: 1.4; }
+    .page { max-width: none; margin: 0; padding: 0; border: 0; }
+    .top, .footer, .eyebrow span:first-child { display: none; }
+    .eyebrow { justify-content: flex-end; margin-bottom: 6pt; font-size: 9pt; }
+    .location { padding: 0; border: 0; }
+    .intro { display: block; }
+    h1 { font-size: 32pt; margin-bottom: 5pt; }
+    h1 br { display: none; }
+    .title { font-size: 12pt; max-width: none; margin-bottom: 8pt; }
+    .contact { display: flex; flex-wrap: wrap; gap: 3pt 12pt; border: 0; padding: 0; font-size: 9pt; }
+    .summary { font-size: 10pt; line-height: 1.4; margin: 12pt 0; max-width: none; }
+    .metrics { padding: 8pt 0; margin-bottom: 14pt; }
+    .metric strong { font-size: 16pt; }
+    .metric span { font-size: 9pt; }
+    .content, .sidebar { display: block; }
+    h2 { font-size: 9pt; margin: 0 0 10pt; break-after: avoid; }
+    .job { padding: 0 0 12pt; border: 0; break-inside: avoid; }
+    .job::before { display: none; }
+    .job h3 { font-size: 12pt; }
+    .where, .when { font-size: 9pt; }
+    .where { margin-top: 3pt; }
+    .job ul { margin-top: 6pt; }
+    .job li { margin: 4pt 0; }
+    .sidebar { break-before: auto; }
+    .sidebar section + section { margin-top: 18pt; }
+    .skills { display: grid; grid-template-columns: 65pt 1fr; gap: 6pt 12pt; }
+    .skills dt { margin: 0; font-size: 10pt; }
+    .project { break-inside: avoid; }
+    .project + .project { margin-top: 12pt; padding-top: 12pt; }
+    .project h3, .education h3 { font-size: 11pt; }
+    .project .project-link { font-size: 9pt; }
     a { color: var(--ink); }
-    .contact a, .project a { color: var(--blue); }
+    .contact a, .project h3 a { color: var(--ink); }
   }
 </style>
 </head>
 <body>
+<nav class="top" aria-label="Resume actions">
+  <a class="back" href="/">← Back to portfolio</a>
+  <button class="print" type="button" onclick="window.print()">Save as PDF <span aria-hidden="true">↗</span></button>
+</nav>
 <main class="page">
-  <div class="top">
-    <a class="back" href="/">← chaituvr.github.io</a>
-    <button class="print" type="button" onclick="window.print()">Save as PDF</button>
-  </div>
 
   <header>
-    <h1>Chaitanya Surneddi</h1>
+    <div class="eyebrow"><span>Resume</span><span class="location">Remote · IST</span></div>
+    <div class="intro">
+    <div>
+    <h1>Chaitanya<br> Surneddi <span class="nickname">(Chaitu)</span></h1>
     <p class="title">Full-stack engineer, web3 infrastructure</p>
+    </div>
     <ul class="contact">
-      <li><a href="mailto:schaituvr@gmail.com">schaituvr@gmail.com</a></li>
-      <li><a href="https://chaituvr.github.io">chaituvr.github.io</a></li>
-      <li><a href="https://github.com/ChaituVR">github.com/ChaituVR</a></li>
-      <li><a href="https://linkedin.com/in/chaituvr">linkedin.com/in/chaituvr</a></li>
-      <li><a href="https://t.me/chaituvr">t.me/chaituvr</a></li>
-      <li>Remote, IST</li>
+      <li><a href="mailto:schaituvr@gmail.com"><svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>schaituvr@gmail.com</a></li>
+      <li><a href="https://chaituvr.github.io"><svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/></svg>chaituvr.github.io</a></li>
+      <li><a href="https://github.com/ChaituVR"><svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.55 9.55 0 0 1 12 6.82c.85 0 1.71.11 2.51.34 1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.69-4.57 4.94.36.31.68.92.68 1.85v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>github.com/ChaituVR</a></li>
+      <li><a href="https://linkedin.com/in/chaituvr"><svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="M5.3 3.5a1.8 1.8 0 1 1 0 3.6 1.8 1.8 0 0 1 0-3.6ZM3.7 8.5h3.2V20H3.7V8.5Zm5.1 0h3.1v1.6h.04c.44-.82 1.5-2 3.1-2 3.3 0 3.9 2.18 3.9 5V20h-3.2v-6.12c0-1.46-.03-3.34-2.03-3.34-2.04 0-2.35 1.59-2.35 3.23V20H8.8V8.5Z"/></svg>linkedin.com/in/chaituvr</a></li>
+      <li><a href="https://t.me/chaituvr"><svg class="contact-icon" aria-hidden="true" viewBox="0 0 24 24" fill="currentColor"><path d="m21.55 3.36-3.2 15.1c-.24 1.07-.87 1.33-1.76.83l-4.87-3.59-2.35 2.26c-.26.26-.48.48-.98.48l.35-4.96 9.03-8.16c.39-.35-.09-.55-.61-.2L6 12.19l-4.8-1.5c-1.04-.33-1.06-1.04.22-1.54L20.2 1.91c.87-.32 1.63.2 1.35 1.45Z"/></svg>t.me/chaituvr</a></li>
     </ul>
-    <p class="summary">Ten years shipping software, six on Snapshot's core team. I build the rails DAOs vote on: voting power, delegation, signatures, and now the agents that use them. 1,587 merged pull requests and 5,300 code reviews across 42 repos, from the Vue interface to the sequencer, indexers and billing.</p>
+    </div>
+    <p class="summary">Ten years of experience building software, with Snapshot's core team since 2020. I work across web3 governance—from voting interfaces and signing flows to APIs, indexers and the infrastructure that verifies and records decisions.</p>
+    <div class="metrics" aria-label="Career highlights">
+      <p class="metric"><strong>Since 2016</strong><span>Shipping software</span></p>
+      <p class="metric"><strong>Since 2020</strong><span>Snapshot core team</span></p>
+      <p class="metric"><strong>1,500+</strong><span><a href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&amp;type=pullrequests">Merged Snapshot PRs ↗</a></span></p>
+      <p class="metric"><strong>5,486</strong><span><a href="https://github.com/search?q=is%3Apr+reviewed-by%3AChaituVR&amp;type=pullrequests">PRs reviewed ↗</a></span></p>
+    </div>
   </header>
 
-  <h2>Experience</h2>
+  <div class="content">
+  <section aria-labelledby="experience">
+  <h2 id="experience">Experience</h2>
 
   <article class="job">
-    <h3>Snapshot Labs</h3>
-    <span class="when">2020 to present</span>
-    <span class="where">Software engineer, core team. Remote.</span>
+    <div class="job-heading"><h3><a class="company-link" href="https://snapshot.org/"><img class="company-logo" src="https://www.google.com/s2/favicons?domain=snapshot.org&amp;sz=64" alt="" width="28" height="28">Snapshot Labs ↗</a></h3><span class="when">2020 — present</span></div>
+    <p class="where">Software engineer · Core team · Remote</p>
     <ul>
-      <li>Shipped across every layer of Snapshot, the voting platform used by most DAOs: the interface (sx-monorepo, snapshot-v1), the SDK (snapshot.js, ~260k installs a year), the sequencer and relayer, the hub GraphQL API, the score API and subgraphs, and billing.</li>
-      <li>Built for the load: 72,000 spaces, 129 networks, and single proposals that take millions of votes. The record is 2.76M on one proposal, peaking at 54 votes a second, each one a signature to verify, store and pin to IPFS.</li>
-      <li>Wrote custom voting-power strategies for DAOs: 159 merged PRs into snapshot-strategies, the 494-strategy library every space picks from. Most recently whitelisted delegation for Grove DAO.</li>
-      <li>Built delegation indexing on mainnet, Arbitrum and Starknet: subgraphs, registries and the delegate APIs that dashboards read.</li>
-      <li>Worked on Snapshot X onchain voting on Starknet and EVM, with spaces, proposals and votes settled onchain and indexed by Checkpoint.</li>
-      <li>Owned EIP-712 signing across MetaMask, Rabby, Frame, Safe and Ledger, including the Starknet path and its eth-sig and eth-tx fallbacks.</li>
-      <li>Ran infra and billing: API keys and rate limits (keycard), RPC routing (brovider), avatars (stamp), webhooks and Discord bots.</li>
-      <li>Built a Snapshot MCP server so Claude and other agents can query, vote and propose, plus Claude Code hooks and scheduled routines that keep 42 repos reviewed and merged.</li>
+      <li>Shipped Vue interfaces, the snapshot.js SDK, GraphQL APIs, sequencer, relayer and billing services.</li>
+      <li>Built custom voting-power strategies and delegation indexing across Ethereum, Arbitrum and Starknet, including registries, subgraphs and delegate APIs.</li>
+      <li>Worked on Snapshot X onchain voting on EVM and Starknet, with proposals and votes indexed by Checkpoint.</li>
+      <li>Implemented EIP-712 signing flows and wallet compatibility across MetaMask, Rabby, Frame, Safe and Ledger.</li>
+      <li>Developed API-key management, rate limiting, RPC routing, webhooks and Discord integrations.</li>
+      <li>Built a Snapshot MCP server for agent-driven governance, alongside Claude Code hooks and review automation.</li>
     </ul>
   </article>
 
   <article class="job">
-    <h3>Capgemini</h3>
-    <span class="when">2018 to 2020</span>
-    <span class="where">Consultant. Hyderabad, for Discover Financial Services.</span>
+    <div class="job-heading"><h3><a class="company-link" href="https://www.capgemini.com/"><img class="company-logo" src="https://www.google.com/s2/favicons?domain=capgemini.com&amp;sz=64" alt="" width="28" height="28">Capgemini ↗</a></h3><span class="when">2018 — 2020</span></div>
+    <p class="where">Consultant · Hyderabad<br>Client: <a href="https://www.discover.com/">Discover Financial Services ↗</a></p>
     <ul>
-      <li>Built React and Redux modules and the GraphQL layer for Action, the call-center desktop app used by Discover's customer-care teams, packaged with Electron.</li>
-      <li>Set up the component workflow with Material UI, Storybook, and Jest and Enzyme tests.</li>
+      <li>Built React, Redux and GraphQL modules for Action, Discover's Electron-based customer-care desktop app.</li>
+      <li>Developed shared components with Material UI and Storybook, with Jest and Enzyme tests.</li>
     </ul>
   </article>
 
   <article class="job">
-    <h3>Innovate Apps</h3>
-    <span class="when">2016 to 2018</span>
-    <span class="where">Software programmer. Visakhapatnam, for TransUnion.</span>
+    <div class="job-heading"><h3><a class="company-link" href="https://in.linkedin.com/company/innovate-apps-inc"><img class="company-logo" src="https://www.google.com/s2/favicons?domain=innovateapps.com&amp;sz=64" alt="" width="28" height="28">Innovate Apps ↗</a></h3><span class="when">2016 — 2018</span></div>
+    <p class="where">Software programmer · Visakhapatnam<br>Client: <a href="https://www.transunion.com/">TransUnion ↗</a></p>
     <ul>
       <li>Built the ACCT data-quality dashboard with React, Redux, D3, Node, Express and GraphQL.</li>
       <li>Shipped a phone-lookup app on React and Node, and worked on TLOxp identity verification in PHP, Zend and MySQL.</li>
@@ -161,31 +245,17 @@
   </article>
 
   <article class="job">
-    <h3>Upwork</h3>
-    <span class="when">2019 to 2020</span>
-    <span class="where">Freelance, alongside full-time work.</span>
+    <div class="job-heading"><h3><a class="company-link" href="https://www.upwork.com/"><img class="company-logo" src="https://www.google.com/s2/favicons?domain=upwork.com&amp;sz=64" alt="" width="28" height="28">Upwork ↗</a></h3><span class="when">2019 — 2020</span></div>
+    <p class="where">Freelance · Alongside full-time work</p>
     <ul>
-      <li>35 contracts and 522 hours, rated 4.9 across 29 reviews. AWS Lambda services, Firebase functions, and build-tooling rescues for people who needed them done that week.</li>
+      <li>35 jobs and 522 hours, rated 4.9 across 29 reviews. Built AWS Lambda services, Firebase functions and developer tooling.</li>
     </ul>
   </article>
 
-  <h2>Selected work</h2>
-  <div class="projects">
-    <div class="project">
-      <h3><a href="https://mockwallet.dev">Mock Wallet</a></h3>
-      <p>A browser wallet for testing dApps. Many accounts from one seed, WalletConnect v2, EIP-712 signing, watch-only impersonation of any address, and an agent mode that auto-approves so end-to-end tests can drive it from a URL. Next.js, ethers.js, Reown WalletKit. MIT, on <a href="https://github.com/ChaituVR/mock-wallet">GitHub</a>.</p>
-    </div>
-    <div class="project">
-      <h3>Snapshot MCP server</h3>
-      <p>Governance for agents: query spaces and proposals, check voting power, vote and propose from Claude and other MCP clients, with the user's wallet bound server-side.</p>
-    </div>
-    <div class="project">
-      <h3><a href="https://github.com/search?q=is%3Apr+author%3AChaituVR+is%3Amerged+org%3Asnapshot-labs&type=pullrequests">1,587 merged PRs at snapshot-labs</a></h3>
-      <p>sx-monorepo, snapshot-v1, snapshot.js, snapshot-sequencer, snapshot-hub, snapshot-strategies, score-api, delegate-registry-api, delegates-api, keycard, brovider, stamp, snapshot-webhook.</p>
-    </div>
-  </div>
-
-  <h2>Skills</h2>
+  </section>
+  <aside class="sidebar" aria-label="Skills, selected work and education">
+  <section aria-labelledby="skills">
+  <h2 id="skills">Technical skills</h2>
   <dl class="skills">
     <dt>Languages</dt><dd>TypeScript, JavaScript, Solidity, Cairo, SQL, PHP</dd>
     <dt>Frontend</dt><dd>Vue, React, Redux, Vite, Tailwind, Storybook, Playwright, Vitest</dd>
@@ -193,13 +263,33 @@
     <dt>Web3</dt><dd>Ethereum, Starknet, EIP-712, ethers.js, viem, starknet.js, WalletConnect, Safe, The Graph, Checkpoint, OpenZeppelin Governor</dd>
     <dt>Agents</dt><dd>MCP, Claude Code, OpenAI API</dd>
   </dl>
+  </section>
+  <section aria-labelledby="projects">
+  <h2 id="projects">Projects</h2>
+  <div class="projects">
+    <div class="project">
+      <span class="project-label">Latest work</span>
+      <h3>Snapshot MCP server</h3>
+      <p>Query spaces and proposals, check voting power, vote and propose from Claude and other MCP clients.</p>
+    </div>
+    <div class="project">
+      <span class="project-label">Selected work</span>
+      <h3><a href="https://mockwallet.dev">Mock Wallet ↗</a></h3>
+      <p>A test wallet for dApps, with multiple accounts, WalletConnect v2, EIP-712 signing and an agent mode for end-to-end tests.</p>
+      <a class="project-link" href="https://github.com/ChaituVR/mock-wallet">View source · MIT ↗</a>
+    </div>
+  </div>
 
-  <h2>Education</h2>
-  <article class="job">
-    <h3>GITAM University</h3>
-    <span class="when">2011 to 2015</span>
-    <span class="where">B.Tech, Industrial Engineering.</span>
-  </article>
+  </section>
+  <section class="education" aria-labelledby="education">
+  <h2 id="education">Education</h2>
+    <h3><a class="company-link" href="https://www.gitam.edu/"><img class="company-logo" src="https://www.google.com/s2/favicons?domain=gitam.edu&amp;sz=64" alt="" width="28" height="28">GITAM University ↗</a></h3>
+    <span class="when">2011 — 2015</span>
+    <p>B.Tech<br>Industrial Engineering</p>
+  </section>
+  </aside>
+  </div>
+  <footer class="footer"><span>Chaitanya Surneddi · Resume</span><a href="mailto:schaituvr@gmail.com">schaituvr@gmail.com ↗</a></footer>
 </main>
 </body>
 </html>
